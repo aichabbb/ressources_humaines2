@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_plus_values_fusion_form" model="ir.ui.view">
+	    <field name="name">view.plus.values.fusion.form</field>
+	    <field name="model">plus.values.fusion</field>
+	    <field name="arch" type="xml">
+	        <form string="PLUS-VALUES CONSTATEES EN CAS DE FUSION">
+				<group>
+					<field name="name"/>
+					<field name="fy_n_id" required="1" />
+					<field name="company_id" invisible="1"/>
+					<!-- Code edi -->
+					
+					<notebook colspan="4">
+						<page string="Lignes">
+							<field name="plus_values_fusion_line_ids" nolabel="1" colspan="4">
+								<tree editable="bottom">
+									<field name="code"/>
+									<field name="name"/>
+									<field name="valeur_apport"/>
+									<field name="valeur_nette_comptable"/>
+									<field name="plus_value_constatee"/>
+									<field name="fraction_exercice_ant"/>
+									<field name="fraction_exercice_actuel"/>
+									<field name="cumul_plus_value_rapportee"/>
+									<field name="solde_plus_value_non_rapportee"/>
+									<field name="observations"/>
+									<field name="edi_valeur_apport" invisible="1"/>
+									<field name="edi_valeur_nette_comptable" invisible="1"/>
+									<field name="edi_plus_value_constatee" invisible="1"/>
+									<field name="edi_fraction_exercice_ant" invisible="1"/>
+									<field name="edi_fraction_exercice_actuel" invisible="1"/>
+									<field name="edi_cumul_plus_value_rapportee" invisible="1"/>
+									<field name="edi_solde_plus_value_non_rapportee" invisible="1"/>
+									<field name="edi_observations" invisible="1"/>
+									<field name="company_id" invisible="1"/>
+								</tree>
+							</field>
+						</page>
+					</notebook>
+				</group>
+	        </form>
+	    </field>
+	</record>
+
+	<record id="view_plus_values_fusion_tree" model="ir.ui.view">
+	    <field name="name">view.plus.values.fusion.tree</field>
+	    <field name="model">plus.values.fusion</field>
+	    <field name="arch" type="xml">
+	        <tree string="PLUS-VALUES CONSTATEES EN CAS DE FUSION">
+				<field name="name"/>
+				<field name="fy_n_id"/>
+				<field name="company_id" />
+			</tree>
+		</field>
+	</record>
+
+	<record id="action_plus_values_fusion" model="ir.actions.act_window">
+	    <field name="name">PLUS-VALUES CONSTATEES EN CAS DE FUSION</field>
+	    <field name="type">ir.actions.act_window</field>
+	    <field name="res_model">plus.values.fusion</field>
+	    <field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem name="TAB-17 PLUS-VALUES CONSTATEES EN CAS DE FUSION" id="menu_plus_values_fusion_id" parent="menu_tables_root" action="action_plus_values_fusion" 
+	sequence="18"/>
+
+	<!-- Ruuules -->
+	<record id="plus_values_fusion_comp_rule" model="ir.rule">
+        <field name="name">plus_values_fusion multi-company</field>
+        <field name="model_id" ref="model_plus_values_fusion" />
+        <field name="domain_force">
+            ['|',('company_id', 'in', company_ids),('company_id','=',False)]
+        </field>
+    </record>
+	<record id="plus_values_fusion_line_comp_rule" model="ir.rule">
+        <field name="name">plus_values_fusion LINES multi-company</field>
+        <field name="model_id" ref="model_plus_values_fusion_line" />
+        <field name="domain_force">
+            ['|',('company_id', 'in', company_ids),('company_id','=',False)]
+        </field>
+    </record>
+	<!-- ___________ -->
+</odoo>

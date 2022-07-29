@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hrresignationform" model="ir.ui.view">
+            <field name="name">hr.resignation.form</field>
+            <field name="model">hr.resignation.type</field>
+            <field name="arch" type="xml">
+               <form string="Service Execute">
+                       <sheet>
+                           <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="0"/>
+                            </h1>
+                        </div>
+
+                            <group>
+
+                                <field name="Type_licenciement"/>
+                            </group>
+                   </sheet>
+                   <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                   </div>
+               </form>
+            </field>
+        </record>
+
+
+        <record id="hr_resignation_type_tree" model="ir.ui.view">
+            <field name="name">hr.resignation.type.tree</field>
+            <field name="model">hr.resignation.type</field>
+            <field name="arch" type="xml">
+                <tree string="resignation type">
+                    <field name="name"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="view_Type_départ">
+            <field name="name">Type de départ</field>
+            <field name="res_model">hr.resignation.type</field>
+            <field name="view_mode">tree,form</field>
+
+        </record>
+
+        <menuitem id="Type_départ_id" parent="employee_resignation" name="Type de départ"
+                  action="view_Type_départ" sequence="5"/>
+    </data>
+</odoo>

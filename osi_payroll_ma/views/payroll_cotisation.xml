@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+  <data>
+    <record id="payroll_cotisation_form" model="ir.ui.view">
+      <field name="name">payroll.cotisation.form</field>
+      <field name="model">ma.payroll.cotisation</field>
+      <field name="arch" type="xml">
+        <form string="">
+          <sheet>
+            <group >
+              <group string="Description">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="company_id"/>
+              </group>
+              <group string="Taux/Montant">
+                <field name="type"/>
+                <field name="salarial_amount"/>
+                <field name="patronal_amount"/>
+              </group>
+            </group>
+            <group  string="Plafond">
+              <group>
+                <field name="is_plafond"/>
+                <field name="plafond"/>
+              </group>
+              <group string="Comptabilité">
+                <field name="credit_account_id"/>
+                <field name="debit_account_id"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="payroll_cotisation_tree" model="ir.ui.view">
+      <field name="name">ma.payroll.cotisation.tree</field>
+      <field name="model">ma.payroll.cotisation</field>
+      <field name="arch" type="xml">
+        <tree string="">
+          <field name="name"/>
+          <field name="code"/>
+          <field name="company_id"/>
+        </tree>
+      </field>
+    </record>
+    
+    <record id="payroll_cotisation_action" model="ir.actions.act_window">
+      <field name="name">Cotisation</field>
+      <field name="res_model">ma.payroll.cotisation</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+    <menuitem
+      id="payroll_cotisation_menu"
+      name="Cotisation"
+      action="payroll_cotisation_action"
+      parent='hr_payroll_community.menu_hr_payroll_community_configuration'
+      sequence="4"/>
+  
+  </data>
+  
+</odoo>

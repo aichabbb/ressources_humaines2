@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+  <data>
+    <record id="payroll_cotisation_type_form" model="ir.ui.view">
+      <field name="name">payroll.cotisation.type.form</field>
+      <field name="model">ma.payroll.cotisation.type</field>
+      <field name="arch" type="xml">
+        <form string="">
+          <sheet>
+            <group >
+              <group string="Description">
+                <field name="name"/>
+                <field name="company_id"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="payroll_cotisation_type_tree" model="ir.ui.view">
+      <field name="name">ma.payroll.cotisation.type.tree</field>
+      <field name="model">ma.payroll.cotisation.type</field>
+      <field name="arch" type="xml">
+        <tree string="">
+          <field name="name"/>
+          <field name="company_id"/>
+        </tree>
+      </field>
+    </record>
+    
+    <record id="payroll_cotisation_type_action" model="ir.actions.act_window">
+      <field name="name">Type de Cotisation</field>
+      <field name="res_model">ma.payroll.cotisation.type</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+    <menuitem
+      id="payroll_cotisation_type_menu"
+      name="Type de Cotisation"
+      action="payroll_cotisation_type_action"
+      parent='hr_payroll_community.menu_hr_payroll_community_configuration'
+      sequence="5"/>
+  
+  </data>
+  
+</odoo>

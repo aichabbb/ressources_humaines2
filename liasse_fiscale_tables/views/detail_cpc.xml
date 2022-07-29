@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="view_detail_cpc_form" model="ir.ui.view">
+	    <field name="name">view.detail.cpc.form</field>
+	    <field name="model">detail.cpc</field>
+	    <field name="arch" type="xml">
+	        <form string="Detail CPC">
+				<header>
+					<button name="get_lines" type="object" string="Mise à jour des données"/>
+                </header>
+				<group>
+					<field name="name"/>
+					<field name="fy_n_id" required="1"/>
+					<field name="company_id" invisible="1"/>
+					<notebook colspan="4">
+						<page string="Lignes">
+							<field name="line_ids" create="false" colspan="4">
+								<tree editable="bottom" create="false">
+									<field name="name"/>
+									<field name="net"/>
+									<field name="prev_net"/>
+									<field name="code_edi_net" invisible="1"/>
+									<field name="code_edi_prev_net" invisible="1"/>
+									<field name="parent_id" invisible="1"/>
+									<field name="company_id" invisible="1"/>
+								</tree>
+							</field>
+						</page>
+					</notebook>
+				</group>
+	        </form>
+	    </field>
+	</record>
+
+	<record id="view_detail_cpc_tree" model="ir.ui.view">
+	    <field name="name">view.detail.cpc.tree</field>
+	    <field name="model">detail.cpc</field>
+	    <field name="arch" type="xml">
+	        <tree string="Detail CPC">
+				<field name="name"/>
+				<field name="fy_n_id"/>
+				<field name="company_id" invisible="1"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="action_detail_cpc" model="ir.actions.act_window">
+	    <field name="name">Detail CPC</field>
+	    <field name="type">ir.actions.act_window</field>
+	    <field name="res_model">detail.cpc</field>
+	    <field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem name="Detail CPC" id="menu_detail_cpc_id" parent="menu_tables_root" action="action_detail_cpc"
+	sequence="4" />
+
+	<!-- PDF report -->
+	<record id="action_report_bdetail_cpc" model="ir.actions.report">
+        <field name="name">Detail CPC</field>
+        <field name="model">detail.cpc</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">liasse_fiscale_tables.repport_report_detail_cpc</field>
+        <field name="report_file">liasse_fiscale_tables.repport_report_detail_cpc</field>
+        <field name="print_report_name"></field>
+        <field name="binding_model_id" ref="model_detail_cpc"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="repport_report_detail_cpc">
+        <t t-call="web.basic_layout">
+
+            <t t-foreach="docs" t-as="doc">
+                <!-- <t t-call="web.internal_layout"> -->
+                <div class="page">
+					<!-- <t t-call="web.basic_layout"> -->
+
+                <div class="oe_structure"/>
+                <div>
+                    <h3 style="text-align: center;">Tableau N°06 : Detail CPC</h3>                 
+                    <h6 >Exercice de : <span style="text-align: left;" t-field="doc.fy_n_id.date_start"/> au : <span style="text-align: right;" t-field="doc.fy_n_id.date_end"/></h6>
+
+                </div>
+                <div class="wrap" >
+				<table class="table table-sm o_main_table" >
+					<!-- In case we want to repeat the header, remove "display: table-row-group" -->
+					<thead style="display: table-row-group">
+						<tr>
+							<!-- <th></th> -->
+							<th style="border: 1px solid;text-align: center;" name="th_name" >Nature</th>
+							<th style="border: 1px solid;text-align: center;" name="amortissement_sortie">Net</th>
+							<th style="border: 1px solid;text-align: center;" name="amortissement_entree">Net d'exercice précédent</th>
+						</tr>
+					</thead>
+					<tbody class="sale_tbody">
+						<t t-foreach="doc.line_ids" t-as="line">
+							<tr>
+								<td style="border: 1px solid;" name="td_name">
+									<span t-field="line.name"/>
+								</td>
+								<td style="border: 1px solid;" name="amortissement_sortie">
+									<span t-field="line.net"/>
+								</td>
+								<td style="border: 1px solid;" name="amortissement_entree">
+									<span t-field="line.prev_net"/>
+								</td>
+							</tr>
+						</t>
+					</tbody>
+				</table>
+            	</div>
+			<!-- </t> -->
+
+            </div>
+        </t>
+        </t>
+    </template>
+  </data>
+</odoo>

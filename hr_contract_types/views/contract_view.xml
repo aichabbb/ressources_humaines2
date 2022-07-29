@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record id="hr_contract_history_view_form2" model="ir.ui.view">
+        <field name="name">hr.contract.history</field>
+        <field name="model">hr.contract.history</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_history_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='contract_ids']/field[@name='state']" position="before">
+                <field name="state_cantrat" widget="badge" decoration-info="state_cantrat == 'CR'"
+                       decoration-warning="state_cantrat == 'MD'" decoration-success="state_cantrat == 'TR'"/>
+            </xpath>
+
+        </field>
+    </record>
+
+
+<!--    <record id="view_employee_form2" model="ir.ui.view">-->
+<!--        <field name="name">hr.contract.employee</field>-->
+<!--        <field name="model">hr.employee</field>-->
+<!--        <field name="inherit_id" ref="hr.view_employee_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='private_email']" position="before">-->
+<!--&lt;!&ndash;                <field name="année_ancienneté"></field>&ndash;&gt;-->
+<!--                <field name="ancienneté_négociée"></field>-->
+<!--                <field name="année_globale"></field>-->
+<!--            </xpath>-->
+
+<!--        </field>-->
+<!--    </record>-->
+
+
+    <record id="hr_contract_form_view_inherit" model="ir.ui.view">
+        <field name="name">hr.contract.view.form.inherit</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='top_info_right']" position="after">
+                <field name="type_id"/>
+            </xpath>
+            <xpath expr="//field[@name='employee_id']" position="before">
+                <field name="date_fin_priode_essai" readonly="0" string="date de fin de période essai"/>
+
+                <field name="date_validation" string="gggggggggggg" invisible="1"/>
+                <field name="périodicité"></field>
+                <field name="rounouv" invisible="1"></field>
+            </xpath>
+            <xpath expr="//field[@name='state']" position="before">
+                <button name="FUNCRenouvellement_période_essai" string="Renouvellement de la période essai "
+                        type="object" class="oe_highlight" attrs="{'invisible': [ ('bool_période2', '=', False)]}"
+                />
+                <button name="button_transformation" string="button transformation "
+                        type="object" class="oe_highlight"
+                        attrs="{'invisible': ['|', ('invisibi', '=', False), ('invisibi', '!=', 'AA')]}"
+                />
+
+                <button name="button_renouvellement" string="button renouvellement "
+                        type="object" class="oe_highlight"
+                        attrs="{'invisible': ['|','|',  ('invisibi', '=', False), ('invisibi', '!=', 'AA'),('rounouv', '=', True)]}"
+                />
+            </xpath>
+            <xpath expr="//field[@name='job_id']" position="after">
+                <group>
+                    <field name="contract_type_id" required="1"/>
+                    <field name="Employee_Category"/>
+                    <field name="int_r"></field>
+
+                    <field name="Duree" invisible="1"></field>
+                    <field name="bool_période2" required="0"></field>
+                    <field name="duree_essai"></field>
+
+                    <field name="bool_type" invisible="1"></field>
+                    <field name="type"></field>
+                    <field name="bool_période2" invisible="0"></field>
+
+                    <field name="bool_période" invisible="1"></field>
+                    <field name="bool_test"></field>
+                    <field name="nombre_h" attrs="{'invisible': [('bool_type', '!=', False)]}"></field>
+                    <field name="invisibi" invisible="1"></field>
+
+                    <label for="Duree" string="Duree" id="label_dates"
+                           attrs="{'invisible': ['|', ('invisibi', '=', False), ('invisibi', '!=', 'AA')]}"/>
+                    <div attrs="{'invisible': ['|', ('invisibi', '=', False), ('invisibi', '!=', 'AA')]}">
+                        <field name="mois" invisible="1" widget="daterange"
+                               attrs="{'invisible': ['|', ('invisibi', '=', False), ('invisibi', '!=', 'AA')]}"/>
+                        <field name="jours" invisible="1"/>
+                        <div class="o_row o_row_readonly">
+                            <field name="mois" class="oe_inline" nolabel="1"/>
+                            <span class="oe_inline">
+                                mois
+                            </span>
+                            <field name="jours" class="oe_inline" nolabel="1"/>
+                            <span class="oe_inline">
+                                jours
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <field name="raison"
+                           attrs="{'invisible': ['|', ('invisibi', '=', True), ('invisibi', '!=', 'AA')]}"></field>
+                    <field name="période" invisible="1" readonly="0"></field>
+                    <field name="mois_essai" invisible="1" readonly="0"></field>
+                    <field name="jours_essai" invisible="1" readonly="0"></field>
+
+
+                    <label for="Duree" string="Période essai" id="label_dates"/>
+                    <div>
+                        <field name="mois_essai" invisible="1" widget="daterange"/>
+                        <field name="jours_essai" invisible="1"/>
+                        <div class="o_row o_row_readonly">
+                            <field name="mois_essai" readonly="0" class="oe_inline" nolabel="1"/>
+                            <span class="oe_inline">
+                                mois
+                            </span>
+                            <field name="jours_essai" readonly="0" class="oe_inline" nolabel="1"/>
+                            <span class="oe_inline">
+                                jours
+                            </span>
+
+                        </div>
+
+                    </div>
+                    <!--field name="Renouvellement_période_essai" attrs="{'invisible': [('bool_période', '=', False)]}"></field-->
+
+
+                    <field name="preavis" invisible="0"></field>
+                    <label for="Duree" string="preavis" id="label_dates"/>
+                    <div>
+                        <field name="mois_preavie" invisible="1" widget="daterange"/>
+                        <field name="jours_preavie" invisible="1"/>
+                        <div class="o_row o_row_readonly">
+                            <field name="mois_preavie" readonly="0" class="oe_inline" nolabel="1"/>
+                            <span class="mois_preavie">
+                                mois
+                            </span>
+                            <field name="jours_preavie" readonly="0" class="oe_inline" nolabel="1"/>
+                            <span class="oe_inline">
+                                jours
+                            </span>
+
+                        </div>
+                    </div>
+
+
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!--    CONTRACT TYPE     -->
+    <record id="hr_contract_type_view_form" model="ir.ui.view">
+        <field name="name">hr.contract.type.form</field>
+        <field name="model">hr.contract.type</field>
+        <field name="arch" type="xml">
+            <form string="Contract Type">
+                <group col="4">
+                    <field colspan="4" name="name"/>
+                    <field name="index"></field>
+                </group>
+                <notebook>
+                    <page string="type">
+                        <field name="type">
+                            <tree string="Installments" editable="bottom">
+                                <field name="name"/>
+                                <field name="id"/>
+
+                            </tree>
+                        </field>
+
+                    </page>
+
+                    <page string="Raison" attrs="{'invisible': [('name', '!=', 'contrat à durée déterminée (CDD)')]}">
+                        <field name="raison">
+                            <tree string="Installments" editable="bottom">
+                                <field name="name"/>
+
+                            </tree>
+                        </field>
+
+                    </page>
+                    <page string="Période essai">
+                        <field name="période">
+                            <tree string="Installments" editable="bottom">
+                                <field name="name"/>
+
+                            </tree>
+                        </field>
+
+                    </page>
+                    <page string="preavis">
+                        <field name="preavis">
+                            <tree string="Installments" editable="bottom">
+                                <field name="name"/>
+
+                            </tree>
+                        </field>
+
+                    </page>
+
+
+                </notebook>
+
+
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_contract_type_view_tree" model="ir.ui.view">
+        <field name="name">hr.contract.type.tree</field>
+        <field name="model">hr.contract.type</field>
+        <field name="arch" type="xml">
+            <tree string="Contract Type">
+                <field name="sequence" widget="handle"/>
+                <field colspan="4" name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_contract_type_view_search" model="ir.ui.view">
+        <field name="name">hr.contract.type.search</field>
+        <field name="model">hr.contract.type</field>
+        <field name="arch" type="xml">
+            <search string="Search Contract Type">
+                <field name="name" string="Contract Type"/>
+                <field name="sequence" string="Sequence"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_hr_contract_type" model="ir.actions.act_window">
+        <field name="name">Contract Types</field>
+        <field name="res_model">hr.contract.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="hr_contract_type_view_search"/>
+    </record>
+
+    <menuitem
+            id="hr_menu_contract_type"
+            action="action_hr_contract_type"
+            parent="hr.menu_human_resources_configuration"
+            sequence="3"
+            groups="base.group_no_one"/>
+</odoo>

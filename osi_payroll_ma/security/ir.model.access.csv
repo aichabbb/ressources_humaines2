@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ma_payroll_rubrique,ma_payroll_rubrique.ma_payroll_rubrique,model_ma_payroll_rubrique,base.group_user,1,1,1,1
+access_ma_payroll_rubrique_submission,ma_payroll_rubrique_submission.ma_payroll_rubrique_submission,model_ma_payroll_rubrique_submission,base.group_user,1,1,1,1
+access_ma_payroll_cotisation,ma_payroll_cotisation.ma_payroll_cotisation,model_ma_payroll_cotisation,base.group_user,1,1,1,1
+access_ma_payroll_cotisation_type,ma_payroll_cotisation_type.ma_payroll_cotisation_type,model_ma_payroll_cotisation_type,base.group_user,1,1,1,1

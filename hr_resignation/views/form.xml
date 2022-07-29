@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+
+<record model="ir.ui.view" id="hr_employee_inherit_form_view">
+
+            <field name="name">hr.employee.form.view</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="employee_resignation_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='personal_information']/group" position="before">
+                    <group name="fam_ids" colspan="4" string="Dependence Details">
+                        <field name="fam_ids">
+                            <tree editable="bottom">
+                                <field name="member_name" required="1"/>
+                                <field name="relation_id" required="1"/>
+                                <field name="member_contact"/>
+                                <field name="birth_date"/>
+                            </tree>
+                        </field>
+                    </group>
+                </xpath>
+                <field name="user_id" position="after">
+                    <field name="joining_date"/>
+                </field>
+                <field name="identification_id" position="replace"/>
+                <field name="passport_id" position="replace"/>
+                <xpath expr="//page[@name='personal_information']/group/group[1]" position="after">
+                    <group name="identification_id" string="Identification ID">
+                        <field name="identification_id"/>
+                        <field name="id_expiry_date"  groups="hr.group_hr_user" attrs="{'invisible': [('identification_id', 'in', [None,False])]}"/>
+                        <field name="id_attachment_id" groups="hr.group_hr_user" widget="many2many_binary" class="oe_inline" attrs="{'invisible': [('identification_id', 'in', [None,False])]}"/>
+                    </group>
+                    <group name="passport_id" string="Passport ID">
+                        <field name="passport_id"/>
+                        <field name="passport_expiry_date" groups="hr.group_hr_user" attrs="{'invisible': [('passport_id', 'in', [None,False])]}"/>
+                        <field name="passport_attachment_id" groups="hr.group_hr_user" widget="many2many_binary" class="oe_inline" attrs="{'invisible': [('passport_id', 'in', [None,False])]}"/>
+                    </group>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

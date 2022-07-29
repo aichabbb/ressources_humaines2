@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="hr_external_layout_no_footer">
+        <div class="header">
+            <div class="row">
+                <div class="col-xs-3 mb4">
+                    <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-height: 45px;"/>
+                </div>
+                <div class="col-xs-9 text-right" style="margin-top:22px;" t-field="company.report_header" name="moto"/>
+            </div>
+            <div t-if="company.logo or company.report_header" class="row zero_min_height">
+                <div class="col-xs-12">
+                    <div style="border-bottom: 1px solid black;"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6" name="company_address">
+                    <span t-field="company.partner_id"
+                        t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+                        style="border-bottom: 1px solid black; display:inline-block;"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="article o_report_layout_standard">
+            <t t-raw="0" />
+        </div>
+
+
+    </template>
+    <template id="external_layout_no_footer">
+        <!-- Multicompany -->
+        <t t-if="not o and doc">
+            <t t-set="o" t-value="doc"/>
+        </t>
+
+        <t t-if="o and 'company_id' in o">
+            <t t-set="company" t-value="o.company_id.sudo()"/>
+        </t>
+        <t t-if="not o or not 'company_id' in o">
+            <t t-set="company" t-value="res_company"/>
+        </t>
+
+        <t t-if="company.external_report_layout_id" t-call="hr_payroll_ma.hr_external_layout_no_footer"><t t-raw="0"/></t>
+        <t t-else="else" t-raw="0"/>
+
+    </template>
+
+    <template id="hr_external_layout_signature">
+        <div class="header">
+            <div class="row">
+                <div class="col-xs-3 mb4">
+                    <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-height: 45px;"/>
+                </div>
+                <div class="col-xs-9 text-right" style="margin-top:22px;" t-field="company.report_header" name="moto"/>
+            </div>
+            <div t-if="company.logo or company.report_header" class="row zero_min_height">
+                <div class="col-xs-12">
+                    <div style="border-bottom: 1px solid black;"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6" name="company_address">
+                    <span t-field="company.partner_id"
+                        t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+                        style="border-bottom: 1px solid black; display:inline-block;"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="article o_report_layout_standard">
+            <t t-raw="0" />
+        </div>
+        <div class="footer">
+            <div>
+                        <table width="100%">
+                            <tr>
+                                <th width="50%"></th>
+                                <th style="text-align: center;vertical-align:middle;vertical-align:middle;border: 1px solid black;border-collapse: collapse" width="50%">Signature:</th>
+                            </tr>
+                            <tr>
+                                <th height="100"></th>
+                                <th style="vertical-align:middle;vertical-align:middle;border: 1px solid black;border-collapse: collapse" height="100"></th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="text-center" style="border-top: 1px solid black;">
+                        <ul t-if="not company.report_footer" class="list-inline">
+                            <t t-set="company" t-value="company.sudo()"/>
+                            <li t-if="company.phone">Phone: <span t-field="company.phone"/></li>
+
+                            <li t-if="company.email">Email: <span t-field="company.email"/></li>
+
+                            <li t-if="company.website">Website: <span t-field="company.website"/></li>
+                        </ul>
+
+                        <ul t-if="not company.report_footer" class="list-inline" name="financial_infos">
+                            <li t-if="company.vat">TIN: <span t-field="company.vat"/></li>
+                        </ul>
+
+                        <t t-if="company.report_footer">
+                            <span t-raw="company.report_footer"/>
+                        </t>
+
+                        <ul class="list-inline">
+                            <li>Page:</li>
+                            <li><span class="page"/></li>
+                            <li>/</li>
+                            <li><span class="topage"/></li>
+                        </ul>
+                    </div>
+        </div>
+
+    </template>
+    <template id="external_layout_with_signature">
+        <!-- Multicompany -->
+        <t t-if="not o and doc">
+            <t t-set="o" t-value="doc"/>
+        </t>
+
+        <t t-if="o and 'company_id' in o">
+            <t t-set="company" t-value="o.company_id.sudo()"/>
+        </t>
+        <t t-if="not o or not 'company_id' in o">
+            <t t-set="company" t-value="res_company"/>
+        </t>
+
+       <t t-if="company.external_report_layout_id"  t-call="hr_payroll_ma.hr_external_layout_signature"><t t-raw="0"/></t>
+        <t t-else="else" t-raw="0"/>
+        <!--<t t-if="company.external_report_layout in (False, 'standard')">-->
+           <!--</t>-->
+        <!--</t>-->
+    </template>
+    <template id="hr_external_layout_bulletin">
+        <div class="header">
+            <div class="row">
+                <div class="col-xs-3 mb4">
+                    <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-height: 45px;"/>
+                </div>
+                <div class="col-xs-9 text-right" style="margin-top:22px;" t-field="company.report_header" name="moto"/>
+            </div>
+        </div>
+
+        <div class="article o_report_layout_standard">
+            <t t-raw="0" />
+        </div>
+        <div class="footer">
+            <div>
+                        <table width="100%">
+                            <tr>
+                                <th width="50%"></th>
+                                <th style="text-align: center;vertical-align:middle;vertical-align:middle;border: 1px solid black;border-collapse: collapse" width="50%">Signature:</th>
+                            </tr>
+                            <tr>
+                                <th height="100"></th>
+                                <th style="vertical-align:middle;vertical-align:middle;border: 1px solid black;border-collapse: collapse" height="100"></th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="text-center" style="border-top: 1px solid black;">
+                        <ul t-if="not company.report_footer" class="list-inline">
+                            <t t-set="company" t-value="company.sudo()"/>
+                            <li t-if="company.phone">Phone: <span t-field="company.phone"/></li>
+
+                            <li t-if="company.email">Email: <span t-field="company.email"/></li>
+
+                            <li t-if="company.website">Website: <span t-field="company.website"/></li>
+                        </ul>
+
+                        <ul t-if="not company.report_footer" class="list-inline" name="financial_infos">
+                            <li t-if="company.vat">TIN: <span t-field="company.vat"/></li>
+                        </ul>
+
+                        <t t-if="company.report_footer">
+                            <span t-raw="company.report_footer"/>
+                        </t>
+
+                        <ul class="list-inline">
+                            <li>Page:</li>
+                            <li><span class="page"/></li>
+                            <li>/</li>
+                            <li><span class="topage"/></li>
+                        </ul>
+                    </div>
+        </div>
+
+    </template>
+    <template id="external_layout_bulletin">
+        <!-- Multicompany -->
+        <t t-if="not o and doc">
+            <t t-set="o" t-value="doc"/>
+        </t>
+
+        <t t-if="o and 'company_id' in o">
+            <t t-set="company" t-value="o.company_id.sudo()"/>
+        </t>
+        <t t-if="not o or not 'company_id' in o">
+            <t t-set="company" t-value="res_company"/>
+        </t>
+
+        <t t-if="company.external_report_layout_id"  t-call="hr_payroll_ma.hr_external_layout_bulletin"><t t-raw="0"/></t>
+        <t t-else="else" t-raw="0"/>
+    </template>
+
+
+
+</odoo>
