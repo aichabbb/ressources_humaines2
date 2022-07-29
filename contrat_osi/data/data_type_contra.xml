@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="type1" model="type">
+            <field name="name">Temps plein</field>
+
+
+        </record>
+        <record id="type2" model="type">
+            <field name="name">Temps partiel</field>
+
+        </record>
+<!--        <record id="raison1" model="raison">-->
+<!--            <field name="name">Remplacement</field>-->
+
+<!--        </record>-->
+<!--        <record id="priode1" model="priode">-->
+<!--            <field name="name">2 semaines</field>-->
+
+<!--        </record>-->
+<!--        <record id="priode2" model="priode">-->
+<!--            <field name="name">1 mois</field>-->
+
+<!--        </record>-->
+<!--        <record id="priode3" model="priode">-->
+<!--            <field name="name">8 jours</field>-->
+
+<!--        </record>-->
+<!--        <record id="raison2" model="raison">-->
+<!--            <field name="name">Accroissement temporaire</field>-->
+
+<!--        </record>-->
+<!--        <record id="raison3" model="raison">-->
+<!--            <field name="name">saisonnier</field>-->
+
+<!--        </record>-->
+<!--        <record id="raison4" model="raison">-->
+<!--            <field name="name">Ouverture d’une entreprise ou d’un établissement</field>-->
+
+<!--        </record>-->
+<!--        <record id="raison5" model="raison">-->
+<!--            <field name="name">Lancement d’un nouveau produit</field>-->
+
+<!--        </record>-->
+
+
+        <record id="hr_ctr_type_cddd" model="hr.contract.type">
+            <field name="name">contrat à durée déterminée (CDD)</field>
+            <field name="type"
+                   eval="[(4, ref('contrat_osi.type1')), (4, ref('contrat_osi.type2'))]"/>
+
+
+
+        </record>
+        <record id="hr_ctr_type_cdi" model="hr.contract.type">
+            <field name="name">contrat à durée indéterminée (CDI)</field>
+
+
+        </record>
+
+        <record id="hr_ctr_type_cad" model="hr.contract.type">
+            <field name="name">contrat pour accomplir un travail déterminé</field>
+        </record>
+        <record id="hr_ctr_type_anapic" model="hr.contract.type">
+            <field name="name">Contrats de stage Formation insertion (l'ANAPEC)</field>
+        </record>
+
+    </data>
+</odoo>
