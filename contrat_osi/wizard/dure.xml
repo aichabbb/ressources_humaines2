@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="view_duree" model="ir.ui.view">
+            <field name="name">dure.form</field>
+            <field name="model">dure</field>
+            <field name="arch" type="xml">
+            <form string="dure">
+                <group >
+                     <div  >
+                            <field name="mois" invisible="1" widget="daterange"  />
+                            <field name="jours" invisible="1"/>
+                            <div class="o_row o_row_readonly">
+                              <field name="mois" class="oe_inline" nolabel="1"/>
+                                <span class="oe_inline" >
+                                    mois
+                                </span>
+                                <field name="jours" class="oe_inline" nolabel="1"/>
+                                <span class="oe_inline" >
+                                    jours
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                </group>
+                <footer>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    <button name="ajouter" type="object" string=" cantrat"></button>
+                </footer>
+            </form>
+            </field>
+        </record>
+
+        <record id="action_wizard_dure" model="ir.actions.act_window">
+            <field name="name">dure</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">dure</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+</odoo>
