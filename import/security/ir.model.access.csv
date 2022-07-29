@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_import_bank,import.bank,model_import_bank,,1,1,1,1
-access_import_salary_rule,import.salary.rule,model_import_salary_rule,,1,1,1,1

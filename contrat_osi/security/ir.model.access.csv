@@ -1,8 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_type,type,model_type,,1,1,1,1
-access_preavis,preavis,model_preavis,,1,1,1,1
-access_raison,raison,model_raison,,1,1,1,1
-access_priode,priode,model_priode,,1,1,1,1
-access_transformation,transformation,model_transformation,,1,1,1,1
-access_category1em,category1em,model_category1em,,1,1,1,1
-access_dure,dure,model_dure,,1,1,1,1
