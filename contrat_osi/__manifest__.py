@@ -16,7 +16,7 @@
         'data/data_type_contra.xml',
         'data/job_position.xml',
         'data/job_position.xml',
-        #'views/type_contrat.xml',
+        'views/conge_type.xml',
         'data/cron.xml',
         'wizard/transformation.xml',
         'wizard/dure.xml',
