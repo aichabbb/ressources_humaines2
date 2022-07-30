@@ -6,13 +6,13 @@
 
             <record id="absence_justifies" model="hr.leave.type">
                 <field name="name">absence justifies</field>
-                <field name="leave_validation_type" eval="hr"></field>
+                <field name="leave_validation_type" >hr</field>
                 <field name="requires_allocation" eval="no"></field>
 
             </record>
             <record id="absence_nom_justifies" model="hr.leave.type">
                 <field name="name">absence nom justifies</field>
-                <field name="leave_validation_type" eval="hr"></field>
+                <field name="leave_validation_type" >hr</field>
                 <field name="requires_allocation" eval="no"></field>
 
             </record>
