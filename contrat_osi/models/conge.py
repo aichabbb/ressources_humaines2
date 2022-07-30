@@ -16,6 +16,7 @@ class hr_leave(models.Model):
             for cong in conge_justifies:
                 sun = cong.number_of_days
                 qty_produced = sum(conge_justifies.mapped('number_of_days'))
+                raise ValidationError(_('vous pouvez choisir durée inférieure ou egale de  %s   .', qty_produced))
 
             # for move in self:
             #     move.quantity_done = sum(move.mapped('move_line_ids.qty_done'))
