@@ -12,22 +12,128 @@
 <!--            </field>-->
 <!--        </record>-->
 
-    <record id="res_config_settings_view_form" model="ir.ui.view">
-        <field name="name">Configure Payroll</field>
+    <record id="res_config_settings_view_form_cantrat" model="ir.ui.view">
+        <field name="name">Configure cantrat</field>
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="hr.res_config_settings_view_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//div[@id='hr_payroll_localization']" position="after">
-                    <h2>Leaves</h2>
-                    <div class="row mt16 o_settings_container" id="hr_leave_salary">
-                        <div class="col-md-6 col-xs-12 o_setting_box">
+                <xpath expr="//div[@name='employees_setting_container']" position="after">
+                                     <h2>Age à la retraite</h2>
+                    <div class="row mt16 o_settings_container" name="work_organization_setting_container_2">
+                        <div class="col-12 col-lg-6 o_setting_box" id="default_company_schedule_setting">
                             <div class="o_setting_right_pane">
-                                <h3>Leave Salary</h3>
-                                <div class="text-muted">
-                                    Leave salary calculation
+                                <!--label for="resource_calendar_id"/-->
+                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." role="img" aria-label="Values set here are company-specific." groups="base.group_multi_company"/>
+                                <div class="row">
+                                    <div class="text-muted col-lg-8">
+                                        ajouter age à la retraite pour votre society
+                                    </div>
                                 </div>
-                                <div class="mt16">
-                                    <field name="default_leave_salary" widget="radio"/>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                    <field name="Age_la_retraite" required="0" class="o_light_label" />
+
+
+
+                                    </div>
+                                    <div class="mt16">
+                                      <label for="délai_notification"/>
+
+                                      <field name="délai_notification"/>
+                                                  <span> days</span>
+
+
+                                      </div>
+
+
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <h2> délai notification de période d essaie</h2>
+                    <div class="row mt16 o_settings_container" name="work_organization_setting_container_3">
+                        <div class="col-12 col-lg-6 o_setting_box" id="default_company_schedule_setting">
+                            <div class="o_setting_right_pane">
+                                <!--label for="resource_calendar_id"/-->
+                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." role="img" aria-label="Values set here are company-specific." groups="base.group_multi_company"/>
+                                <div class="row">
+                                    <div class="text-muted col-lg-8">
+                                        ajouter délai notification de période d essaie pour votre society
+                                    </div>
+                                </div>
+                                <div class="content-group">
+
+
+                                     <div class="mt16">
+                                           <label for="délai_notification_essai"/>
+                                              <div >
+                                                  <field name="délai_notification_essai"  />
+                                                  <span> days</span>
+                                              </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                      <h2>  plafond des absence justifie</h2>
+                    <div class="row mt16 o_settings_container" name="work_organization_setting_container_4">
+                        <div class="col-12 col-lg-6 o_setting_box" id="default_company_schedule_setting">
+                            <div class="o_setting_right_pane">
+                                <!--label for="resource_calendar_id"/-->
+                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." role="img" aria-label="Values set here are company-specific." groups="base.group_multi_company"/>
+                                <div class="row">
+                                    <div class="text-muted col-lg-8">
+                                        ajouter plafond des absence justifie
+                                    </div>
+                                </div>
+                                <div class="content-group">
+
+
+                                     <div class="mt16">
+                                           <label for="plafond_des_absence_justifie"/>
+                                              <div >
+                                                  <field name="plafond_des_absence_justifie"  />
+                                                  <span> days</span>
+                                              </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <h2>  plafond des  absence nom justifie</h2>
+                    <div class="row mt16 o_settings_container" name="work_organization_setting_container_4">
+                        <div class="col-12 col-lg-6 o_setting_box" id="default_company_schedule_setting">
+                            <div class="o_setting_right_pane">
+                                <!--label for="resource_calendar_id"/-->
+                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." role="img" aria-label="Values set here are company-specific." groups="base.group_multi_company"/>
+                                <div class="row">
+                                    <div class="text-muted col-lg-8">
+                                        plafond des absence non justifie
+                                    </div>
+                                </div>
+                                <div class="content-group">
+
+
+                                     <div class="mt16">
+                                           <label for="plafond_des_absence_non_justifie"/>
+                                              <div >
+                                                  <field name="plafond_des_absence_non_justifie"  />
+                                                  <span> days</span>
+                                              </div>
+
+
+
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <data noupdate="1">
+
+
+            <record id="absence_justifies" model="hr.leave.type">
+                <field name="name">absence justifies</field>
+                <field name="leave_validation_type" eval="hr"></field>
+                <field name="requires_allocation" eval="no"></field>
+
+            </record>
+            <record id="absence_nom_justifies" model="hr.leave.type">
+                <field name="name">absence nom justifies</field>
+                <field name="leave_validation_type" eval="hr"></field>
+                <field name="requires_allocation" eval="no"></field>
+
+            </record>
+
+
+        </data>
+
+    </data>
+</odoo>
