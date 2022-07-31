@@ -22,7 +22,7 @@ class conge(models.TransientModel):
         contract = self.env['hr.resignation'].create({
             'employee_id': self.conge.employee_id.id,
             'reason': 'test',
-            'type_depart':type,
+            'Type_depart':type,
             'type_licenciement': type_licenciement,
 
         })
