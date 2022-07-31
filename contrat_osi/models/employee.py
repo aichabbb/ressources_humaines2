@@ -27,6 +27,7 @@ class employee(models.Model):
             d2= cant.first_contract_date
             Madate_d2 = str(d2)
             Madate_d = str(today)
+            raise ValidationError(_('NE PEUX PAS DEPASSE CONTRAT CDD UN AN %s %s  .', Madate_d2, Madate_d))
             date = cant.date_start_z
             moit_test = Madate_d2.split("-")[2]
             moit_test_today = Madate_d.split("-")[2]
