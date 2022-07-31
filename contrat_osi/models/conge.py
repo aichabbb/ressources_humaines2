@@ -10,6 +10,8 @@ class hr_leave(models.Model):
 
 
 
+
+
     def control_de_plafonds_absence(self):
         if self.holiday_status_id.name == "absence justifies":
             conge_justifies = self.env['hr.leave'].search([('holiday_status_id', '=', "absence justifies"),('employee_id', '=', self.employee_id.id)])
@@ -19,14 +21,13 @@ class hr_leave(models.Model):
                 raise ValidationError(_('vous pouvez choisir durée inférieure ou egale de  %s   .', qty_produced))
                 if qty_produced >= 180:
                     return {
-                        'name': _('transformation'),
+                        'name': _('conge'),
                         'view_mode': 'form',
-                        'res_model': 'transformation',
-                        'view_id': self.env.ref('contrat_osi.view_wizard').id,
+                        'res_model': 'conge   ',
+                        'view_id': self.env.ref('contrat_osi.view_conge').id,
                         'type': 'ir.actions.act_window',
                         'target': 'new',
-                        'context': {'default_contrat_type': self.contract_type_id.id, 'default_cantrat': self.id,
-                                    'default_indeex': self.contract_type_id.index},
+                        'context': {'default_conge': self.id, },
                     }
 
             # for move in self:

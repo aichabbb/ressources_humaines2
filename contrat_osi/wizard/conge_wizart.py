@@ -10,15 +10,25 @@ _logger = logging.getLogger(__name__)
 class conge(models.TransientModel):
     _name = 'conge'
 
+
+    conge = fields.Many2one('hr.leave')
+
+
+
     def ajouter(self):
-        contract = self.env['hr.contract'].create({
-            'employee_id': self.cantrat.employee_id.id,
-            'name': s.cantrat.name,
+        type = self.env['hr.resignation.type'].search([('name', '=', 'Licenciement')]).id
+        type_licenciement = self.env['type.licenciement'].search([('name', '=', 'Abondant de poste')]).id
+
+        contract = self.env['hr.resignation'].create({
+            'employee_id': self.conge.employee_id.id,
+            'reason': 'test',
+            'type_depart':type,
+            'type_licenciement': type_licenciement,
 
         })
         return {
             "type": "ir.actions.act_window",
-            "res_model": "hr.contract",
+            "res_model": "hr.resignation",
             "views": [[False, "form"]],
             "res_id": contract.id,
         }

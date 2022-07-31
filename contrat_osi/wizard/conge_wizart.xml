@@ -8,8 +8,9 @@
             <form string="dure">
 
                 <footer>
-                    <button string="Cancel" class="btn-secondary" special="cancel"/>
-                    <button name="ajouter" type="object" string=" create "></button>
+                    <button string="nom resilier" class="btn-secondary" special="cancel"/>
+                    <button name="ajouter" type="object" string=" resilier "></button>
+
                 </footer>
             </form>
             </field>
