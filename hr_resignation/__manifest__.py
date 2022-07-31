@@ -35,7 +35,7 @@
         'security/security.xml',
         'security/ir.model.access.csv',
         #'data/resign_employee.xml',
-        #'data/data_Type_départ.xml',
+        'data/data_Type_départ.xml',
         'views/hr_employee.xml',
         'views/resignation_view.xml',
         'views/approved_resignation.xml',
