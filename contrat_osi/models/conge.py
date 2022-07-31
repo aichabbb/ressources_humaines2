@@ -18,6 +18,7 @@ class hr_leave(models.Model):
             for cong in conge_justifies:
                 sun = cong.number_of_days
                 qty_produced = sum(conge_justifies.mapped('number_of_days'))
+                raise ValidationError(_('vous pouvez choisir durée inférieure ou egale de  %s   .', qty_produced))
                 if qty_produced >= 180:
                     return {
                         'name': _('conge'),
