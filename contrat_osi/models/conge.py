@@ -13,7 +13,8 @@ class hr_leave(models.Model):
 
 
     def control_de_plafonds_absence(self):
-        if self.holiday_status_id.name == "absence justifies":
+        absence_justifies = self.env.ref('contrat_osi.absence_justifies')
+        if self.holiday_status_id == absence_justifies:
             conge_justifies = self.env['hr.leave'].search([('holiday_status_id', '=', "absence justifies"),('employee_id', '=', self.employee_id.id)])
             for cong in conge_justifies:
                 sun = cong.number_of_days
