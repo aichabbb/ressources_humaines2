@@ -1,12 +1,43 @@
 # -*- coding: utf-8 -*-
 import datetime
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
 date_format = "%Y-%m-%d"
 RESIGNATION_TYPE = [('resigned', 'Normal Resignation'),
                     ('fired', 'Fired by the company')]
+
+
+
+
+
+
+class HrResignationtype(models.Model):
+    _name = 'hr.resignation.type'
+    _inherit = 'mail.thread'
+    name = fields.Char()
+    seq = fields.Char(default=lambda x: _('New'))
+    Type_licenciement = fields.Many2one('type.licenciement', string="Type de licenciement")
+
+
+
+
+
+
+
+
+    @api.model
+    def create(self, vals):
+        vals['seq'] = self.env['ir.sequence'].next_by_code('hr.resignation.type')
+        return super(HrResignationtype, self).create(vals)
+
+
+class Type_licenciement(models.Model):
+    _name = 'type.licenciement'
+    name = fields.Char()
+
+
 
 
 class HrResignation(models.Model):
@@ -20,6 +51,14 @@ class HrResignation(models.Model):
                                   help='Name of the employee for whom the request is creating')
     department_id = fields.Many2one('hr.department', string="Department", related='employee_id.department_id',
                                     help='Department of the employee')
+    Type_départ = fields.Many2one('hr.resignation.type', string="Type de départ",
+                                     )
+    type_licenciement = fields.Many2one('type.licenciement', string="Raison de licenciement ",
+                                     )
+    neme_licenciement = fields.Char(store=True)
+
+
+
     resign_confirm_date = fields.Date(string="Confirmed Date",
                                       help='Date on which the request is confirmed by the employee.',
                                       track_visibility="always")
@@ -31,7 +70,7 @@ class HrResignation(models.Model):
 
     expected_revealing_date = fields.Date(string="Last Day of Employee", required=True,
                                           help='Employee requested date on which he is revealing from the company.')
-    reason = fields.Text(string="Reason", required=True, help='Specify reason for leaving the company')
+    reason = fields.Text(string="description", required=True, help='Specify reason for leaving the company')
     notice_period = fields.Char(string="Notice Period")
     state = fields.Selection(
         [('draft', 'Draft'), ('confirm', 'Confirm'), ('approved', 'Approved'), ('cancel', 'Rejected')],
@@ -39,7 +78,41 @@ class HrResignation(models.Model):
     resignation_type = fields.Selection(selection=RESIGNATION_TYPE, help="Select the type of resignation: normal "
                                                                          "resignation or fired by the company")
     read_only = fields.Boolean(string="check field")
+    bool = fields.Boolean(string="boll", default=False)
+    bool_afiche_preavie = fields.Boolean(string="afiche preavie", default=False)
     employee_contract = fields.Char(String="Contract")
+
+    type = fields.Many2one(
+        'type',
+        string='type',
+    )
+    Employee_Category = fields.Many2one('category1em', string="Employee Category",
+                                        )
+    preavis = fields.Many2one('preavis', string="preavis",
+                              )
+
+
+
+
+
+
+
+    def traitement_date_fin(self):
+        contrat = self.env['hr.contract'].search([('state', '=', 'open'),('contract_type_id.name', '=', 'contrat à durée indéterminée (CDI)'),('employee_id', '=', self.employee_id.id)])
+
+        contrat.date_end = self.expected_revealing_date
+        contrat.state = 'close'
+
+
+    @api.onchange('Type_départ')
+    @api.depends('Type_départ')
+    def _compute_Type_départ(self):
+        if self.Type_départ:
+            self.neme_licenciement = self.Type_départ.name
+
+
+
+
 
     @api.onchange('employee_id')
     @api.depends('employee_id')
@@ -84,6 +157,7 @@ class HrResignation(models.Model):
     @api.depends('employee_id')
     def check_request_existence(self):
         # Check whether any resignation request already exists
+        today = fields.Date.today()
         for rec in self:
             if rec.employee_id:
                 resignation_request = self.env['hr.resignation'].search([('employee_id', '=', rec.employee_id.id),
@@ -94,9 +168,22 @@ class HrResignation(models.Model):
                 if rec.employee_id:
                     no_of_contract = self.env['hr.contract'].search([('employee_id', '=', self.employee_id.id)])
                     for contracts in no_of_contract:
+
                         if contracts.state == 'open':
                             rec.employee_contract = contracts.name
                             rec.notice_period = contracts.notice_days
+                            rec.Employee_Category = contracts.Employee_Category
+                            rec.type = contracts.type
+                            if contracts.date_fin_priode_essai:
+                                start_date = fields.Date.from_string(self.expected_revealing_date)
+                                end_date = fields.Date.from_string(contracts.date_fin_priode_essai)
+                                if today > end_date:
+                                    rec.bool = True
+                                    rec.preavis = contracts.preavis
+
+
+
+
 
     @api.constrains('joined_date')
     def _check_dates(self):
@@ -157,6 +244,8 @@ class HrResignation(models.Model):
                     if rec.employee_id.user_id:
                         rec.employee_id.user_id.active = False
                         rec.employee_id.user_id = None
+                rec.traitement_date_fin()
+
             else:
                 raise ValidationError(_('Please enter valid dates.'))
 

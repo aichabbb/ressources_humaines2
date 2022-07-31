@@ -19,6 +19,7 @@
         'data/conge_type.xml',
         'data/cron.xml',
         'wizard/transformation.xml',
+        'wizard/cong_wizart.xml',
         'wizard/dure.xml',
     ],
     'license': 'AGPL-3',

@@ -4,14 +4,14 @@
         <record id="employee_resignation_tree" model="ir.ui.view">
             <field name="name">hr.resignation.tree</field>
             <field name="model">hr.resignation</field>
-            <field name="priority" eval="8" />
+            <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <tree string="Employee Resignation">
                     <field name="employee_id"/>
                     <field name="department_id"/>
                     <field name="employee_contract"/>
                     <field name="joined_date" readonly="1"/>
-                    <field name="expected_revealing_date" />
+                    <field name="expected_revealing_date"/>
                     <field name="approved_revealing_date"/>
                     <field name="resignation_type"/>
                     <field name="notice_period"/>
@@ -22,15 +22,19 @@
         <record id="employee_resignation_form" model="ir.ui.view">
             <field name="name">hr.resignation.form</field>
             <field name="model">hr.resignation</field>
-            <field name="priority" eval="8" />
+            <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <form string="Employee Resignation">
                     <header>
-                        <button string="Confirm" type="object" name="confirm_resignation" states='draft' class="oe_highlight"/>
+                        <button string="Confirm" type="object" name="confirm_resignation" states='draft'
+                                class="oe_highlight"/>
                         <button string="Cancel" type="object" name="cancel_resignation" states='draft'/>
-                        <button string="Approve" type="object" groups="hr.group_hr_user" name="approve_resignation" states='confirm'/>
-                        <button string="Reject" type="object" groups="hr.group_hr_user" name="reject_resignation" states='confirm'/>
-                        <button string="Set to Draft" type="object" groups="hr.group_hr_manager" name="reset_to_draft" states='approved'/>
+                        <button string="Approve" type="object" groups="hr.group_hr_user" name="approve_resignation"
+                                states='confirm'/>
+                        <button string="Reject" type="object" groups="hr.group_hr_user" name="reject_resignation"
+                                states='confirm'/>
+                        <button string="Set to Draft" type="object" groups="hr.group_hr_manager" name="reset_to_draft"
+                                states='approved'/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,confirm"/>
                     </header>
                     <sheet>
@@ -42,9 +46,16 @@
                         <group>
                             <group string="Employee Details">
                                 <field name="read_only" invisible="1"/>
-                                <field name="employee_id" attrs="{'readonly': ['|',('read_only','=',False),('state','=','approved')]}"/>
+                                <field name="employee_id"
+                                       attrs="{'readonly': ['|',('read_only','=',False),('state','=','approved')]}"/>
                                 <field name="department_id"/>
-                                <field name="employee_contract"/>
+                                <field name="type" readonly="1"/>
+
+                                <field name="Employee_Category" readonly="1"/>
+                                <field name="bool" invisible="1"  />
+                                <field name="preavis" readonly="1"  attrs="{'invisible': [('bool','=',False),('neme_licenciement','==','Licenciement')]}" />
+
+                                <field name="employee_contract" readonly="1" />
                             </group>
                             <group string="Dates">
                                 <field name="joined_date"/>
@@ -53,12 +64,20 @@
                                        attrs="{'invisible':[('resign_confirm_date','=',False)]}"/>
                                 <field name="expected_revealing_date" attrs="{'readonly': [('state','=','approved')]}"/>
                                 <field name="approved_revealing_date"
-                                        groups="hr.group_hr_user"/>
+                                       groups="hr.group_hr_user"/>
                                 <field name="notice_period"/>
                             </group>
                             <group string="Resignation Details">
-                                <field name="resignation_type" string="Type" groups="hr.group_hr_user" attrs="{'readonly': [('state','=','approved')]}"/>
-                                <field name="reason" attrs="{'readonly': [('state','=','approved')]}"/>
+                                <field name="Type_départ"/>
+                                <field name="type_licenciement" attrs="{'invisible':['|',('neme_licenciement','=',False),('neme_licenciement','!=','Licenciement')]}" />
+                                <field name="neme_licenciement" invisible="1"/>
+
+
+<!--                                <field name="resignation_type" string="Type" groups="hr.group_hr_user"-->
+<!--                                       attrs="{'readonly': [('state','=','approved')]}"/>-->
+<!--                                <group attrs="{'invisible': [('neme_licenciement','=','Licenciement')] }">-->
+                                <field name="reason" attrs="{'readonly': [('state','=','approved')],'invisible': [('neme_licenciement','=','Licenciement')]  }"/>
+<!--                                </group>-->
                             </group>
                         </group>
                     </sheet>

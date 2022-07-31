@@ -17,6 +17,17 @@ class hr_leave(models.Model):
                 sun = cong.number_of_days
                 qty_produced = sum(conge_justifies.mapped('number_of_days'))
                 raise ValidationError(_('vous pouvez choisir durée inférieure ou egale de  %s   .', qty_produced))
+                if qty_produced >= 180:
+                    return {
+                        'name': _('transformation'),
+                        'view_mode': 'form',
+                        'res_model': 'transformation',
+                        'view_id': self.env.ref('contrat_osi.view_wizard').id,
+                        'type': 'ir.actions.act_window',
+                        'target': 'new',
+                        'context': {'default_contrat_type': self.contract_type_id.id, 'default_cantrat': self.id,
+                                    'default_indeex': self.contract_type_id.index},
+                    }
 
             # for move in self:
             #     move.quantity_done = sum(move.mapped('move_line_ids.qty_done'))

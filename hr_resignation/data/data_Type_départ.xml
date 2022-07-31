@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="type1" model="hr.resignation.type">
+            <field name="name">Démission</field>
+            <field name="seq">Démission</field>
+
+
+        </record>
+        <record id="type2" model="hr.resignation.type">
+            <field name="name">Licenciement</field>
+
+
+        </record>
+        <record id="type3" model="hr.resignation.type">
+            <field name="name">Maladie</field>
+
+
+        </record>
+        <record id="type4" model="hr.resignation.type">
+            <field name="name">Retraite</field>
+
+
+        </record>
+        <record id="type5" model="hr.resignation.type">
+            <field name="name">décès</field>
+
+
+        </record>
+        <record id="type6" model="hr.resignation.type">
+            <field name="name">transfert intragroupe</field>
+
+
+        </record>
+        <record id="Type_licenciement1" model="type.licenciement">
+            <field name="name">Faute Grave</field>
+
+
+        </record>
+        <record id="Type_licenciement2" model="type.licenciement">
+            <field name="name">Licenciement abusif</field>
+
+
+        </record>
+        <record id="Type_licenciement3" model="type.licenciement">
+            <field name="name">Abondant de poste</field>
+
+
+        </record>
+
+    </data>
+</odoo>
