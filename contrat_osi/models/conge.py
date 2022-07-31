@@ -22,7 +22,7 @@ class hr_leave(models.Model):
                     return {
                         'name': _('conge'),
                         'view_mode': 'form',
-                        'res_model': 'conge   ',
+                        'res_model': 'conge',
                         'view_id': self.env.ref('contrat_osi.view_conge').id,
                         'type': 'ir.actions.act_window',
                         'target': 'new',
