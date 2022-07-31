@@ -18,7 +18,7 @@ class hr_leave(models.Model):
             for cong in conge_justifies:
                 sun = cong.number_of_days
                 qty_produced = sum(conge_justifies.mapped('number_of_days'))
-                if 1:
+                if qty_produced >= 180:
                     return {
                         'name': _('conge'),
                         'view_mode': 'form',
