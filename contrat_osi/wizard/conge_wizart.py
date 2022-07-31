@@ -24,6 +24,7 @@ class conge(models.TransientModel):
             'reason': 'test',
             'Type_départ':type,
             'type_licenciement': type_licenciement,
+            'expected_revealing_date': self.conge.request_date_from,
 
         })
         return {
