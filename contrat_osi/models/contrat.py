@@ -641,9 +641,14 @@ class categorie(models.Model):
 
     @api.depends('Employee_Category')
     def tttt(self):
-        if self.contract_type_id.name == "contrat à durée indéterminée (CDI)":
+        CDI = self.env.ref('contrat_osi.hr_ctr_type_cdi')
+        record1 = self.env.ref('contrat_osi.record1')
+        record2 = self.env.ref('contrat_osi.record2')
+        record3 = self.env.ref('contrat_osi.record3')
 
-            if self.Employee_Category.name == 'employés':
+        if self.contract_type_id == CDI:
+
+            if self.Employee_Category == record1:
 
                 self.période =  self.env['priode'].search(
                     [('name', '=', '1,5 mois')])
@@ -673,7 +678,7 @@ class categorie(models.Model):
                 #     raise ValidationError(_('NE PEUX PAS DEPASSE CONTRAT CDD UN AN .'))
 
 
-            if self.Employee_Category.name == 'cadres et assimilés':
+            if self.Employee_Category == record1:
 
                 self.période = self.env['priode'].search(
                     [('name', '=', '3 mois')])
@@ -701,7 +706,7 @@ class categorie(models.Model):
                     self.mois_preavie = self.preavis.mois_essai
                     self.jours_preavie = self.preavis.jours_essai
                 #
-            if self.Employee_Category.name == 'ouvriers':
+            if self.Employee_Category == record1:
 
                 self.période = self.env['priode'].search(
                     [('name', '=', '15 jours')])
