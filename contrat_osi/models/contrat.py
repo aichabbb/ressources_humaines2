@@ -317,7 +317,7 @@ class categorie(models.Model):
     test_write = fields.Boolean('write', default=True,store=True)
     date_tesssst = fields.Datetime()
     contract_type_id = fields.Many2one('hr.contract.type', "Contract Type", tracking=True)
-    périodicité  = fields.Selection([('hebdomadaire', "hebdomadaire"),('heure', "heure"), ('journalier', "journalier"), ('quinzaine', "quinzaine"), ('mensuelle', "mensuelle")],tracking=True)
+    périodicité  = fields.Selection([('hebdomadaire', "hebdomadaire"),('heure', "horaire"), ('journalier', "journalier"), ('quinzaine', "quinzaine"), ('mensuelle', "mensuelle")],tracking=True)
 
 
 
