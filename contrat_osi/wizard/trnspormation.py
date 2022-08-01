@@ -56,8 +56,11 @@ class transformation(models.TransientModel):
                         'state': 'draft',
                         'wage': rc.cantrat.wage,
                     })
-                    rc.cantrat.state = 'close'
-                    rc.cantrat.date_end = today
+
+                    rc.cantrat.write({'state': 'close',
+                            'date_end': today,
+                            })
+
                     return {
                         "type": "ir.actions.act_window",
                         "res_model": "hr.contract",
