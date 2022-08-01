@@ -50,6 +50,7 @@ class transformation(models.TransientModel):
                         'structure_type_id': rc.cantrat.structure_type_id.id,
                         'Employee_Category': rc.cantrat.Employee_Category.id,
                         'type': rc.cantrat.type.id,
+                        'cotisation': rc.cantrat.cotisation.id,
                         #'trial_date_end': "2022-09-14",
                         'state': 'draft',
                         'wage': rc.cantrat.wage,
