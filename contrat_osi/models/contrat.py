@@ -909,7 +909,7 @@ class categorie(models.Model):
         self.transformation = False
         self.write({'state_cantrat': 'TR'
                     })
-
+        self.cloturer_contrat()
 
         return {
             'name': _('transformation'),

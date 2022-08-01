@@ -57,7 +57,6 @@ class transformation(models.TransientModel):
                         'state': 'draft',
                         'wage': rc.cantrat.wage,
                     })
-                    self.cloturer_contrat()
                     self.cantrat.write({'state': 'close',
                                       'date_end': today,
                                       })
