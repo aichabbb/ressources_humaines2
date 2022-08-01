@@ -31,8 +31,6 @@ class transformation(models.TransientModel):
 
     def action_de_transformation(self):
         self.ensure_one()
-        today = fields.Date.today()
-
 
         for rc in self:
             if rc.contrat_type_transformation.index == 1:
@@ -56,8 +54,6 @@ class transformation(models.TransientModel):
                         'state': 'draft',
                         'wage': rc.cantrat.wage,
                     })
-
-
                     return {
                         "type": "ir.actions.act_window",
                         "res_model": "hr.contract",
