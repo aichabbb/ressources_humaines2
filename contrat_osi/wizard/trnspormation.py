@@ -57,7 +57,7 @@ class transformation(models.TransientModel):
                         'wage': rc.cantrat.wage,
                     })
                     rc.cantrat.state = 'close'
-                    rc.cantrat.date_fin = today
+                    rc.cantrat.date_end = today
                     return {
                         "type": "ir.actions.act_window",
                         "res_model": "hr.contract",
