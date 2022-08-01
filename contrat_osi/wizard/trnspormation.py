@@ -57,7 +57,7 @@ class transformation(models.TransientModel):
                         'wage': rc.cantrat.wage,
                     })
 
-                    rc.cantrat.write({'state': 'close',
+                    self.cantrat.write({'state': 'close',
                             'date_end': today,
                             })
 
