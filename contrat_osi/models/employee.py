@@ -26,13 +26,13 @@ class employee(models.Model):
 
             d = cant.date_start_z
             d2= cant.first_contract_date
-            for r in list:
 
-                r.append({
-                    'TD': d,
+            move_dict = {
+                'date': d,
 
-                })
-            _logger.info('Device  is now disconnected UUUUUUUUUUUUUUUUUUUUUUUUUUUU%s', list)
+
+            }
+            _logger.info('Device  is now disconnected UUUUUUUUUUUUUUUUUUUUUUUUUUUU%s', move_dict)
 
             # d3 = d+ relativedelta(years=1)
             # if d2 >= d3  :
