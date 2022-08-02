@@ -30,7 +30,7 @@ class employee(models.Model):
                 'TD': d,
 
             })
-            raise ValidationError(_('NE PEUX PAS DEPASSE CONTRAT CDD UN AN %s %s  .',list))
+            raise ValidationError(_('NE PEUX PAS DEPASSE CONTRAT CDD UN AN %s %s  .'))
             # d3 = d+ relativedelta(years=1)
             # if d2 >= d3  :
             #     raise ValidationError(_('NE PEUX PAS DEPASSE CONTRAT CDD UN AN %s %s  .'))
