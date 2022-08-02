@@ -27,6 +27,7 @@ class employee(models.Model):
             d = cant.date_start_z
             d2= cant.first_contract_date
             d3 = d2+ relativedelta(years=1)
+            raise ValidationError(_('NE PEUX PAS DEPASSE CONTRAT CDD UN AN %s %s  .',d,d3))
             if d >= d3  :
                 raise ValidationError(_('NE PEUX PAS DEPASSE CONTRAT CDD UN AN %s %s  .'))
             # if d2 >= d3:
