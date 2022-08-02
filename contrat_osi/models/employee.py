@@ -12,7 +12,7 @@ class employee(models.Model):
     année_globale = fields.Integer(string="globale ancienneté")
     année_ancienneté2 = fields.Char(string="année ancienneté")
     ancienneté_négociée = fields.Integer(string="ancienneté négociée")
-    date_start_z = fields.Date('Start Date')
+    date_start_z = fields.Date('Start Date', required=True, default=fields.Date.today,index=True)
 
 
     def anne_aanciennete(self):
@@ -26,18 +26,10 @@ class employee(models.Model):
 
             d = cant.date_start_z
             d2= cant.first_contract_date
-
-            move_dict = {
-                'date': d,
-
-
-            }
-            _logger.info('Device  is now disconnected UUUUUUUUUUUUUUUUUUUUUUUUUUUU%s', move_dict)
-
-            # d3 = d+ relativedelta(years=1)
-            # if d2 >= d3  :
-            #     raise ValidationError(_('NE PEUX PAS DEPASSE CONTRAT CDD UN AN %s %s  .'))
-            # # if d2 >= d3:
+            d3 = d2+ relativedelta(years=1)
+            if d >= d3  :
+                raise ValidationError(_('NE PEUX PAS DEPASSE CONTRAT CDD UN AN %s %s  .'))
+            # if d2 >= d3:
             #     d4 = d3 + relativedelta(years=1)
             #
             # # list.append({
