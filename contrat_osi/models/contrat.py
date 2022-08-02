@@ -608,7 +608,7 @@ class categorie(models.Model):
                 #     raise ValidationError(_('NE PEUX PAS DEPASSE CONTRAT CDD UN AN .'))
 
 
-            if self.Employee_Category == record1:
+            if self.Employee_Category == record2:
 
                 self.période = self.env['priode'].search(
                     [('name', '=', '3 mois')])
@@ -636,7 +636,7 @@ class categorie(models.Model):
                     self.mois_preavie = self.preavis.mois_essai
                     self.jours_preavie = self.preavis.jours_essai
                 #
-            if self.Employee_Category == record1:
+            if self.Employee_Category == record3:
 
                 self.période = self.env['priode'].search(
                     [('name', '=', '15 jours')])
