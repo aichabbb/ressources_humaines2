@@ -12,7 +12,7 @@ class employee(models.Model):
     année_globale = fields.Integer(string="globale ancienneté")
     année_ancienneté2 = fields.Char(string="année ancienneté")
     ancienneté_négociée = fields.Integer(string="ancienneté négociée")
-    date_start_z = fields.Date('Start Date', required=True,index=True)
+    date_start_z = fields.Date('Start Date')
 
 
     def anne_aanciennete(self):
@@ -31,10 +31,10 @@ class employee(models.Model):
 
             })
             raise ValidationError(_('NE PEUX PAS DEPASSE CONTRAT CDD UN AN %s %s  .',list))
-            d3 = d+ relativedelta(years=1)
-            if d2 >= d3  :
-                raise ValidationError(_('NE PEUX PAS DEPASSE CONTRAT CDD UN AN %s %s  .'))
-            # if d2 >= d3:
+            # d3 = d+ relativedelta(years=1)
+            # if d2 >= d3  :
+            #     raise ValidationError(_('NE PEUX PAS DEPASSE CONTRAT CDD UN AN %s %s  .'))
+            # # if d2 >= d3:
             #     d4 = d3 + relativedelta(years=1)
             #
             # # list.append({
