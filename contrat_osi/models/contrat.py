@@ -234,13 +234,15 @@ class categorie2(models.Model):
 
 
                 if rec.contract_type_id.name == "contrat à durée indéterminée (CDI)":
+                    rec.int_r =  rec.période.Duree
                     if rec.duree_essai > rec.période.Duree:
                         raise ValidationError(_('ne peux pas dépasse priode essai  initiale.'))
                         rec.int_r = rec.duree_essai
                         rec.bool_test = False
                     if rec.duree_preavie > rec.preavis.Duree:
+                        rec.int_r = rec.preavis.Duree
                         raise ValidationError(_('ne peux pas dépasse priode essai  initiale.'))
-                        rec.int_r = rec.duree_essai
+
                         rec.bool_test = False
 
             #         # if rec.Employee_Category.name == 'employés':
