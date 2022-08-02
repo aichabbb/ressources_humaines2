@@ -281,7 +281,7 @@ class categorie(models.Model):
                               domain="[('contrat_type_priod', '=', contract_type_id)]" , store=True,tracking=True)
     Renouvellement_période_essai = fields.Char(string="Renouvellement de la période essai ",tracking=True)
     bool_période = fields.Boolean('ttttt', default=False, store=True)
-    bool_période2 = fields.Boolean('testttttt', default=False, store=True)
+    bool_période2 = fields.Boolean('testttttt', default=True, store=True)
 
     type = fields.Many2one(
         'type',
