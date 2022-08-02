@@ -22,19 +22,35 @@ class employee(models.Model):
         for cant in self:
             # renew_date = fields.Date.from_string(cant.date_start_z)
             # renew_date2 = fields.Date.from_string(cant.first_contract_date)
+            list = []
 
             d = cant.date_start_z
             d2= cant.first_contract_date
-            Madate_d2 = str(d2)
-            Madate_d = str(today)
-            raise ValidationError(_('NE PEUX PAS DEPASSE CONTRAT CDD UN AN %s %s  .', Madate_d2, Madate_d))
-            date = cant.date_start_z
-            moit_test = Madate_d2.split("-")[2]
-            moit_test_today = Madate_d.split("-")[2]
-            raise ValidationError(_('NE PEUX PAS DEPASSE CONTRAT CDD UN AN %s %s  .',moit_test_today,moit_test))
-            if moit_test_today > moit_test :
-                cant.ancienneté_négociée = cant.année_ancienneté +2
-                cant.année_globale = cant.année_ancienneté + cant.ancienneté_négociée
+            d3 = d2+ relativedelta(years=1)
+            if d2 >= d3  :
+                raise ValidationError(_('NE PEUX PAS DEPASSE CONTRAT CDD UN AN %s %s  .'))
+            # if d2 >= d3:
+            #     d4 = d3 + relativedelta(years=1)
+            #
+            # # list.append({
+            # #     'TD': today,
+            # #
+            # # })
+            #
+            #
+            #
+            #
+            #
+            # Madate_d2 = str(d2)
+            # Madate_d = str(today)
+            # raise ValidationError(_('NE PEUX PAS DEPASSE CONTRAT CDD UN AN %s %s  .', Madate_d2, Madate_d))
+            # date = cant.date_start_z
+            # moit_test = Madate_d2.split("-")[2]
+            # moit_test_today = Madate_d.split("-")[2]
+            # raise ValidationError(_('NE PEUX PAS DEPASSE CONTRAT CDD UN AN %s %s  .',moit_test_today,moit_test))
+            # if moit_test_today > moit_test :
+            #     cant.ancienneté_négociée = cant.année_ancienneté +2
+            #     cant.année_globale = cant.année_ancienneté + cant.ancienneté_négociée
 
 
             # date = str(g)
