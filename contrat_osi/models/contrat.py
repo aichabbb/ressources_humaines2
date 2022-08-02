@@ -160,7 +160,7 @@ class categorie2(models.Model):
                 r.int_r = r.période.Duree
                 if r.duree_essai >  r.période.Duree:
 
-                    raise ValidationError(_('ne peux pas dépasse priode essai  initiale.'))
+                   # raise ValidationError(_('ne peux pas dépasse priode essai  initiale.'))
 
                     self.write({'bool_test': False
                                 })
