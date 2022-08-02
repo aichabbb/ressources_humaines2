@@ -10,9 +10,7 @@ class employee(models.Model):
 
     année_ancienneté = fields.Integer(string="année ancienneté")
     année_globale = fields.Integer(string="globale ancienneté")
-    année_ancienneté2 = fields.Char(string="année ancienneté")
     ancienneté_négociée = fields.Integer(string="ancienneté négociée")
-    date_start_z = fields.Date('Start Date', required=True, default=fields.Date.today,index=True)
 
 
     def anne_aanciennete(self):
@@ -20,67 +18,13 @@ class employee(models.Model):
 
 
         for cant in self:
-            # renew_date = fields.Date.from_string(cant.date_start_z)
-            # renew_date2 = fields.Date.from_string(cant.first_contract_date)
-            list = []
+            if cant.first_contract_date:
 
-            d = cant.date_start_z
-            d2= cant.first_contract_date
-            d3 = d2+ relativedelta(years=1)
-            date = today.year - d2.year
-            _logger.info('Device  is now disconnected UUUUUUUUUUUUUUUUUUUUUUUUUUUU%s', date)
+                d2= cant.first_contract_date
+                self.année_ancienneté = today.year - d2.year
+                cant.année_globale = cant.année_ancienneté + cant.ancienneté_négociée
+            if self.birthday:
+                date = today - self.birthday
 
-            if today >= d3  :
-                raise ValidationError(_('NE PEUX PAS DEPASSE CONTRAT CDD UN AN %s %s  .'))
-
-            # if d2 >= d3:
-            #     d4 = d3 + relativedelta(years=1)
-            #
-            # # list.append({
-            # #     'TD': today,
-            # #
-            # # })
-            #
-            #
-            #
-            #
-            #
-            # Madate_d2 = str(d2)
-            # Madate_d = str(today)
-            # raise ValidationError(_('NE PEUX PAS DEPASSE CONTRAT CDD UN AN %s %s  .', Madate_d2, Madate_d))
-            # date = cant.date_start_z
-            # moit_test = Madate_d2.split("-")[2]
-            # moit_test_today = Madate_d.split("-")[2]
-            # raise ValidationError(_('NE PEUX PAS DEPASSE CONTRAT CDD UN AN %s %s  .',moit_test_today,moit_test))
-            # if moit_test_today > moit_test :
-            #     cant.ancienneté_négociée = cant.année_ancienneté +2
-            #     cant.année_globale = cant.année_ancienneté + cant.ancienneté_négociée
-
-
-            # date = str(g)
-            # #diff = (d.date() - d2.date())
-            # datee = date.split("days")[0]
-            # # ittt = int(datee)
-            # # date2 =  ittt / 360
-            # #
-            # cant.année_ancienneté2 = datee
-            # if cant.année_ancienneté2 :
-            #     cant.année_ancienneté = int(cant.année_ancienneté2) / 360
-            #
-            #
-            # cant.année_globale = cant.année_ancienneté + cant.ancienneté_négociée
-            #
-            #
-            # _logger.info('Device  is now disconnected UUUUUUUUUUUUUUUUUUUUUUUUUUUU%s', datee)
-
-
-
-
-
-
-    #
-    #
-    #
-    #
-    #
-
+                if date >= 63  :
+                    raise ValidationError(_('fin de priode de travaille de employee  .'))

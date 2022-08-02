@@ -487,20 +487,7 @@ class categorie(models.Model):
 
 
 
-    # def calcule_date_de_fin_de_période_essai(self):
-    #
-    #     if self.période.name == "2 semaines":
-    #         self.date_fin_priode_essai = self.date_start + timedelta(weeks=2)
-    #     elif self.période.name == "1 mois":
-    #         self.date_fin_priode_essai = self.date_start + relativedelta(months=1)
-    #     elif self.période.name == "3 mois":
-    #         self.date_fin_priode_essai = self.date_start + relativedelta(months=3)
-    #     elif self.période.name == "1,5 mois":
-    #         self.date_fin_priode_essai = self.date_start + relativedelta(months=1) + timedelta(days=15)
-    #     elif self.période.name == "15 jours":
-    #         self.date_fin_priode_essai = self.date_start + timedelta(days=15)
-    #     elif self.période.name == "8 jours":
-    #         self.date_fin_priode_essai = self.date_start + timedelta(days=8)
+
 
 
 
@@ -527,9 +514,7 @@ class categorie(models.Model):
                     if rec.get('raison') == rc.raison.id:
                         raise ValidationError(_('change raison.'))
 
-                        # TEST1 = self.env['hr.contract'].search(
-                        #     [ ('employee_id', '=', rec.get('employee_id')), ('contract_type_id', '=', contrat_cdd), ('raison', '=',rc)])
-                        # if TEST1:
+
 
             contrat_cdi = self.env['hr.contract.type'].search(
                 [('name', '=', 'contrat à durée indéterminée (CDI)')]).id
@@ -548,56 +533,9 @@ class categorie(models.Model):
         return res
 
 
-    # @api.depends('Employee_Category')
-    # def tttt2(self):
-    #     preiode = self.env['priode'].search([])
-    #
-    #
-    #     for rec in preiode:
-    #         if self.Employee_Category.name == 'employés':
-    #             self.bool_période = 'A'
-    #             if rec.type == self.bool_période:
-    #                 self.période = self.env['priode'].search(
-    #                     [('name', '=', '1,5 mois')])
-    #
-    #
-    #
-    #
-    #         if self.Employee_Category.name == 'cadres et assimilés':
-    #             self.bool_période = 'B'
-    #             if rec.type == self.bool_période:
-    #                 self.période = self.env['priode'].search(
-    #                     [('name', '=', '3 mois')])
-    #
-    #         if self.Employee_Category.name == 'ouvriers':
-    #             self.bool_période = 'C'
-    #             if rec.type == self.bool_période:
-    #                 self.période = self.env['priode'].search(
-    #                     [('name', '=', '15 jours')])
 
 
 
-
-    # @api.constrains('formula', 'tag_name')
-    # def _validate_formula(self):
-    #     for record in self:
-    #         if record.formula and record.tag_name:
-    #             raise ValidationError(
-    #                 _("Tag name and formula are mutually exclusive, they should not be set together on the same tax report line."))
-    # @api.depends('Duree')
-    # def afiche_priode_essai(self):
-    #     if self.Duree < 180:
-    #         self.période =  self.env['priode'].search(
-    #             [('name', '=', '1,5 mois')])
-    #         self.mois_essai = self.période.mois_essai
-    #         self.jours_essai = self.période.jours_essai
-
-    # @api.onchange('mois_essai','jours_essai','mois','jours')
-    # def fonction(self):
-    #     self.mois_essai = self.mois_essai
-    #     self.jours_essai = self.jours_essai
-    #     self.mois = self.mois
-    #     self.jours = self.jours
     @api.onchange('Duree')
 
     @api.depends('Duree')
@@ -626,16 +564,8 @@ class categorie(models.Model):
 
 
 
-                # str3 = str2[0]
-                # self.jours_essai = int(str3)
-                # if self.Duree > int(Madate):
-                #     raise ValidationError(_('ne peux pas depasse cette duree  %s ',Madate))
-                #
-
-                #self.période_essai()
 
 
-                _logger.info('Device  is now disconnected UUUUUUUUUUUUUUUUUUUUUUUUUUUU%s', Liouma)
 
     @api.onchange('Employee_Category')
 
@@ -853,23 +783,6 @@ class categorie(models.Model):
 
 
           self.date_fin_priode_essai = self.date_start + timedelta(days=self.duree_essai)
-        #self.bool_période2 = True
-
-
-
-        # if self.période.name == "2 semaines":
-        #     self.date_fin_priode_essai = self.date_start + timedelta(weeks=2)
-        #
-        # elif self.période.name == "1 mois":
-        #     self.date_fin_priode_essai = self.date_start + relativedelta(months=1)
-        # elif self.période.name == "3 mois":
-        #     self.date_fin_priode_essai = self.date_start + relativedelta(months=3)
-        # elif self.période.name == "1,5 mois":
-        #     self.date_fin_priode_essai = self.date_start + relativedelta(months=1) + timedelta(days=15)
-        # elif self.période.name == "15 jours":
-        #     self.date_fin_priode_essai = self.date_start + timedelta(days=15)
-        # elif self.période.name == "8 jours":
-        #     self.date_fin_priode_essai = self.date_start + timedelta(days=8)
 
     def FUNCRenouvellement_période_essai(self):
         var = self.duree_essai
@@ -883,25 +796,7 @@ class categorie(models.Model):
             self.date_fin_priode_essai = self.date_start + timedelta(days=rounev)
 
 
-            # if self.période.name == "2 semaines":
-            #     self.Renouvellement_période_essai = "2 semaines"
-            #     self.date_fin_priode_essai = self.date_fin_priode_essai + timedelta(weeks=2)
-            #
-            # elif self.période.name == "1 mois":
-            #     self.Renouvellement_période_essai = "1 mois"
-            #     self.date_fin_priode_essai = self.date_fin_priode_essai + relativedelta(months=1)
-            # elif self.période.name == "3 mois":
-            #     self.Renouvellement_période_essai = "3 mois"
-            #     self.date_fin_priode_essai = self.date_fin_priode_essai + relativedelta(months=3)
-            # elif self.période.name == "1,5 mois":
-            #     self.Renouvellement_période_essai = "1,5 mois"
-            #     self.date_fin_priode_essai = self.date_fin_priode_essai + relativedelta(months=1) + timedelta(days=15)
-            # elif self.période.name == "15 jours":
-            #     self.Renouvellement_période_essai = "15 jours"
-            #     self.date_fin_priode_essai = self.date_fin_priode_essai + timedelta(days=15)
-            # elif self.période.name == "8 jours":
-            #     self.Renouvellement_période_essai = "8 jours"
-            #     self.date_fin_priode_essai = self.date_fin_priode_essai + timedelta(days=8)
+
             self.bool_période = True
 
 
@@ -932,13 +827,7 @@ class categorie(models.Model):
 
         self.write({'state_cantrat': 'RN'
                     })
-        #date1 = self.date_tesssst.date()
-        #date2 = date(date)
-        # diff = (event_date.date() - today.date())
-        # st_date = datetime.strptime(self.date_start, "%Y-%m-%d")
-        #self.date_tesssst.days
 
-        #_logger.info('Device  is now disconnected UUUUUUUUUUUUUUUUUUUUUUUUUUUU%s',date1.days)
         if self.contract_type_id.name == "contrat à durée déterminée (CDD)":
 
             Madate = str(self.date_start)
@@ -985,15 +874,6 @@ class categorie(models.Model):
                 if self.jours:
                    self.jours = self.jours * 2
                 self.CALCULE_duree()
-            # elif self.mois == 6:
-            #     if self.jours != 0:
-            #         raise ValidationError(_('ne peux pas depase cntrat un an  .'))
-            #
-            #         self.mois = self.mois * 2
-            #         # if self.jours:
-            #         #     self.jours = self.jours * 2
-            #         self.CALCULE_duree()
-
 
 
 
@@ -1038,83 +918,3 @@ class categorie(models.Model):
                  'date_deadline': self.date_end,
                  'note': 'le cheque valider'
                  })
-        # if today == self.date_validation:
-        #
-        #     if self.create_uid.id:
-        #         user_id = self.create_uid.id
-        #         ext = self.env.ref('contrat_osi.model_hr_contract').id
-        #         self.activity_ids.create(
-        #             {'activity_type_id': 4, 'res_id': self.id, 'user_id': user_id,
-        #              'res_model_id': ext,
-        #              'date_deadline': self.date_end,
-        #              'note': 'le cheque valider'
-        #              })
-
-
-    # @api.onchange('date_end')
-    # def tttt(self):
-    #
-    #     _logger.info('Device  is now disconnected cccccccccccccccccccccccccc%s')
-    #     self.test()
-
-    # @api.model_create_multi
-    # def create(self, vals_list):
-    #     for i in vals_list:
-    #         _logger.info('Device  is now disconnected cccccccccccccccccccccccccc%s')
-    #         DATE1 = i.date_start
-    #         DATE2 = i.date_end
-    #
-    #         init_date = dt.strptime(str(i.date_start), '%Y-%m-%d')
-    #         end_date = dt.strptime(str(i.date_end), '%Y-%m-%d')
-    #         nombre = (end_date - init_date).days
-    #         _logger.info('Device  is now disconnected zzzzzzzzzzzzzzzzzzzz%s')
-    #         if nombre < 31:
-    #             i.nombre_h = str((end_date - init_date).days)
-    #
-    #
-    #     return super(categorie, self).create(vals_list)
-    #
-
-    # def test(self):
-    #     for i in self:
-    #         _logger.info('Device  is now disconnected cccccccccccccccccccccccccc%s')
-    #         DATE1 = i.date_start
-    #         DATE2 = i.date_end
-    #
-    #
-    #         init_date = dt.strptime(str(i.date_start), '%Y-%m-%d')
-    #         end_date = dt.strptime(str(i.date_end), '%Y-%m-%d')
-    #         nombre = (end_date - init_date).days
-    #         _logger.info('Device  is now disconnected zzzzzzzzzzzzzzzzzzzz%s')
-    #         if nombre < 31:
-    #             i.Duree = str((end_date - init_date).days)
-    # else:
-    #     nombre_h = str((end_date - init_date).month)
-
-    # d1 = date.strptime(self.date_start, fmt)
-    #
-    # d2 = date.strptime(self.date_end, fmt)
-    # renew_date = fields.Date.from_string(self.date_start)
-    # renew_date2 = fields.Date.from_string(self.date_end)
-    # daysDiff = str((d2 - d1).days)
-
-    # _logger.info('Device  is now disconnected cccccccccccccccccccccccccc%s', nombre)
-
-    # @api.onchange('date_end')
-    # def compute(self):
-    #     if self.contract_type_id.name == "contrat à durée déterminée (CDD)":
-    #         fmt = '%Y-%m-%d'
-    #         d1 = datetime.strptime(self.date_start, fmt)
-    #
-    #         d2 = datetime.strptime(self.date_end, fmt)
-    #         renew_date = fields.Date.from_string(self.date_start)
-    #         renew_date2 = fields.Date.from_string(self.date_end)
-    #         daysDiff = str((d2 - d1).days)
-    #
-    #         _logger.info('Device  is now disconnected cccccccccccccccccccccccccc%s', daysDiff)
-
-    # @api.depends('contract_type_id')
-    # def _func_contract_type_id(self):
-    #     if self.contract_type_id.name == 'contrat à durée déterminée (CDD)':
-    #         self.raison = self.env['raison'].search([('contrat_type', '=', self.contract_type_id)]).id
-    #
