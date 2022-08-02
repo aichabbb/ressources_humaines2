@@ -28,7 +28,7 @@ class employee(models.Model):
             d2= cant.first_contract_date
             d3 = d2+ relativedelta(years=1)
             date = today.year - d2.year
-            raise ValidationError(_('NE PEUX PAS DEPASSE CONTRAT CDD UN AN %s %s  .'))
+            _logger.info('Device  is now disconnected UUUUUUUUUUUUUUUUUUUUUUUUUUUU%s', date)
 
             if today >= d3  :
                 raise ValidationError(_('NE PEUX PAS DEPASSE CONTRAT CDD UN AN %s %s  .'))
