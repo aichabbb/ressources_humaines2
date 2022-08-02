@@ -26,10 +26,12 @@ class employee(models.Model):
 
             d = cant.date_start_z
             d2= cant.first_contract_date
-            list.append({
-                'TD': d,
+            for r in list:
 
-            })
+                r.append({
+                    'TD': d,
+
+                })
             _logger.info('Device  is now disconnected UUUUUUUUUUUUUUUUUUUUUUUUUUUU%s', list)
 
             # d3 = d+ relativedelta(years=1)
