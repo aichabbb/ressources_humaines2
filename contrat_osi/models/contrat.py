@@ -146,6 +146,8 @@ class categorie2(models.Model):
     #
     @api.onchange('duree_essai')
     @api.depends('duree_essai')
+    @api.onchange('duree_preavie')
+    @api.depends('duree_preavie')
     #fonction pour test duree_essai suprieure aduree sur le loi
 
     def function_duree_essai(self):
@@ -579,7 +581,7 @@ class categorie(models.Model):
                 if self.jours_essai > 14 :
                     self.jours_essai = 14
             if self.Duree > 363:
-                raise ValidationError(_('ne peux pas depasse un mois de priode essai '))
+                raise ValidationError(_('ne peux pas depasse 12  mois de duree de contrat'))
 
 
 
