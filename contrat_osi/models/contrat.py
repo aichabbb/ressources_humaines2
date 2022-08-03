@@ -156,30 +156,30 @@ class categorie2(models.Model):
                     raise ValidationError(_('ne peux pas depasse un mois de priode essai '))
 
 
-            if rec.bool_période2 == True:
+            if r.bool_période2 == True:
 
 
-                if rec.contract_type_id.name == "contrat à durée indéterminée (CDI)":
-                    rec.int_r =  rec.période.Duree + 3
-                    if rec.duree_essai > rec.période.Duree + 3:
+                if r.contract_type_id.name == "contrat à durée indéterminée (CDI)":
+                    r.int_r =  r.période.Duree + 3
+                    if r.duree_essai > r.période.Duree + 3:
                         raise ValidationError(_('ne peux pas dépasse priode essai  initiale.'))
-                        rec.int_r = rec.duree_essai
-                        rec.bool_test = False
-                    if rec.duree_preavie > rec.preavis.Duree + 3:
-                        rec.int_r = rec.preavis.Duree
-                        raise ValidationError(_('ne peux pas dépasse priode essai  initiale.'))
-
-                        rec.bool_test = False
-            elif rec.bool_période2 == False:
-                if rec.contract_type_id.name == "contrat à durée indéterminée (CDI)":
-                    rec.int_r =  rec.période.Duree * 2
-                    if rec.duree_essai > rec.période.Duree * 2:
-                        raise ValidationError(_('ne peux pas dépasse priode essai  initiale.'))
-                        rec.bool_test = False
-                    if rec.duree_preavie > rec.preavis.Duree * 2:
+                        r.int_r = r.duree_essai
+                        r.bool_test = False
+                    if r.duree_preavie > r.preavis.Duree + 3:
+                        r.int_r = r.preavis.Duree
                         raise ValidationError(_('ne peux pas dépasse priode essai  initiale.'))
 
-                        rec.bool_test = False
+                        r.bool_test = False
+            elif r.bool_période2 == False:
+                if r.contract_type_id.name == "contrat à durée indéterminée (CDI)":
+                    r.int_r =  r.période.Duree * 2
+                    if r.duree_essai > r.période.Duree * 2:
+                        raise ValidationError(_('ne peux pas dépasse priode essai  initiale.'))
+                        r.bool_test = False
+                    if r.duree_preavie > r.preavis.Duree * 2:
+                        raise ValidationError(_('ne peux pas dépasse priode essai  initiale.'))
+
+                        r.bool_test = False
 
     @api.onchange('duree_preavie')
     @api.depends('duree_preavie')
