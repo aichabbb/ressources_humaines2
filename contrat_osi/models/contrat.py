@@ -183,9 +183,9 @@ class categorie2(models.Model):
         for r in self:
             if r.contract_type_id.name == "contrat à durée indéterminée (CDI)" and r.bool_période2 == True:
                 r.int_r = r.période.Duree
-                if r.duree_preavie > r.preavis.Duree:
-                    #self.bool_test = False
-                    raise ValidationError(_('ne peux pas dépasse priode essai  initiale.'))
+                # if r.duree_preavie > r.preavis.Duree:
+                #     #self.bool_test = False
+                #     #raise ValidationError(_('ne peux pas dépasse priode essai  initiale.'))
 
                     # self.write({'bool_test': False
                     #             })
