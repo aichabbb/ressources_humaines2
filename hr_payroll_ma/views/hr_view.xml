@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- HR contract  -->
+        <record model="ir.ui.view" id="view_hr_contract_tree_inherits">
+            <field name="name">hr.contract.view.form.inherits</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_tree"/>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <field name="date_end" position="after">
+                    <field name="actif"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_hr_contract_form_inherits">
+            <field name="name">hr.contract.view.form.inherits</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button string="Clôturer contrat" attrs="{'invisible':[('actif','=',False)]}" type="object"
+                            name="cloturer_contrat" class="oe_highlight"/>
+                    <button string="Activer contrat" attrs="{'invisible':[('actif','=',True)]}" type="object"
+                            name="activer_contrat" class="oe_highlight"/>
+                </xpath>
+                <field name="type_id" position="after">
+                    <field name="actif"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </field>
+                <field name="employee_id" position="attributes">
+                    <attribute name="options">{'no_create': True,'no_open':True}</attribute>
+                </field>
+                <field name="department_id" position="attributes">
+                    <attribute name="options">{'no_create': True,'no_open':True}</attribute>
+                </field>
+                <field name="job_id" position="attributes">
+                    <attribute name="options">{'no_create': True,'no_open':True}</attribute>
+                </field>
+
+
+                <notebook position="inside">
+                    <page string="Configuration de la paie">
+                        <group>
+                            <group>
+                                <field name="salary_type"/>
+                                <field name="wage" attrs="{'invisible':[('salary_type','!=', 'm')]}" string="Salaire de base"/>
+                                <field name="hour_salary" attrs="{'invisible':[('salary_type','=', 'm')]}"/>
+                                <field name="ir" groups="hr_payroll_ma.group_hr_payroll_settings"/>
+                            </group>
+                            <group>
+                                <field name="working_days_per_month"/>
+                                <field name="monthly_hour_number" attrs="{'invisible':[('salary_type','!=', 'h')]}"/>
+                                <field name="cotisation" options="{'no_create': True, 'no_open':True}"/>
+
+                            </group>
+                            <field name="rubrique_ids" colspan="4" nolabel="1"/>
+                        </group>
+                    </page>
+                </notebook>
+                <xpath expr="//page[@name='information']" position="replace">
+
+                </xpath>
+            </field>
+        </record>
+        <!--
+            HR employee  
+        -->
+
+
+
+        <record model="ir.ui.view" id="view_employee_kanban_inherits">
+            <field name="name">view.employee.kanban.inherits</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <br/>
+                    <field name="prenom"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_employee_tree_inherits">
+            <field name="name">view.employee.tree.inherits</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_tree"/>
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="matricule"/>
+                </field>
+
+                <field name="name" position="after">
+                    <field name="prenom"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_employee_form_inherits">
+            <field name="name">view.employee.form.inherits</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <div>
+                        <field name="prenom" required="1" placeholder="Prénom"/>
+                    </div>
+                </field>
+                <field name="coach_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="identification_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="bank_account_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+
+                <xpath expr="//page[@name='personal_information']/group/group[position()=2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <field name="department_id" position="attributes">
+                    <attribute name="options">{'no_create': True,'no_open':True}</attribute>
+                </field>
+                <field name="job_id" position="attributes">
+                    <attribute name="options">{'no_create': True,'no_open':True}</attribute>
+                </field>
+                <field name="parent_id" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                <field name="user_id" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                <field name="category_ids" position="attributes">
+                    <attribute name="placeholder">Catégories</attribute>
+                </field>
+                <notebook position="inside">
+                    <page string="Configuration de la paie">
+                        <group>
+                            <group string="Indentifiants">
+                                <field name="matricule"/>
+                                <field name="cin"/>
+                                <field name="affilie" groups="hr_payroll_ma.group_hr_payroll_settings"/>
+                                <field name="ssnid" string="CNSS" attrs="{'invisible': [('affilie','=',False )]}"/>
+                                <field name="matricule_mutuelle" string="Matricule mutuelle"/>
+                            </group>
+                            <group string="Réglement salaire">
+                                <field name="mode_reglement"/>
+                                <field name="bank" options="{'no_create': True, 'no_open':True}"
+                                   attrs="{'required':[('mode_reglement','=','virement')],'invisible':[('mode_reglement','!=','virement')]}"/>
+                                <field name="agence" attrs="{'invisible':[('mode_reglement','!=','virement')]}"/>
+                                <field name="compte"
+                                   attrs="{'required':[('mode_reglement','=','virement')],'invisible':[('mode_reglement','!=','virement')]}"/>
+                            </group>
+                            <group string="Ancienneté">
+                                 <field name="date"/>
+                                 <field name="anciennete" groups="hr_payroll_ma.group_hr_payroll_settings"/>
+                                 <field name="annees_anciennete"/>
+                                <field name="taux_anciennete"/>
+
+                            </group>
+                            <group string="Autres informations">
+                                <field name="chargefam"/>
+                                <field name="address_home"/>
+                                <!--<field name="address" />-->
+                                <field name="phone_home"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page string="Prêt logement" groups="hr_payroll_ma.group_hr_payroll_pret_logement">
+                        <group>
+                            <group string="Infos logement">
+                                <field name="type_logement"/>
+                                <field name="superficie_logement"/>
+                                <field name="prix_acquisition_logement"/>
+                            </group>
+                            <group string="Montant">
+                                <field name="logement"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+
+
+            </field>
+        </record>
+        <record id="view_employee_filter_inherit_matricule" model="ir.ui.view">
+            <field name="name">hr.employee.search.inherit.search</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_filter"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="prenom"/>
+                    <field name="matricule"/>
+                </field>
+            </field>
+        </record>
+
+        <menuitem parent="" id="menu_ressources_humaines_root" name="Ressources Humaines" sequence="4"/>
+        <menuitem parent="menu_ressources_humaines_root" id="hr.menu_human_resources_configuration"
+                  name="Configuration"/>
+        <menuitem parent="menu_ressources_humaines_root" id="hr.menu_hr_root" name="Ressources Humaines" sequence="4"/>
+        <menuitem parent="hr.menu_human_resources_configuration" name="Postes" id="menu_job_id"
+                  action="hr.action_hr_job" sequence="4"/>
+    </data>
+</odoo>
+    
