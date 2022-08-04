@@ -1,0 +1,12 @@
+<odoo>
+    <data>
+
+        <menuitem action="import_bank" id="id_import_bank" name="import"   parent="account.menu_finance"/>
+        <menuitem id="import_payroll_global_settings" name="import"
+                  parent="hr_payroll_community.menu_hr_payroll_community_configuration"
+                  sequence="10"
+                  action="import_payroll"
+                 />
+
+    </data>
+</odoo>
