@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="type1" model="type">
+            <field name="name">Temps plein</field>
+
+
+        </record>
+        <record id="type2" model="type">
+            <field name="name">Temps partiel</field>
+
+        </record>
+        <record id="type1_cdi" model="type">
+            <field name="name">Temps plein</field>
+
+
+        </record>
+        <record id="type2_cdi" model="type">
+            <field name="name">Temps partiel</field>
+
+        </record>
+
+        <record id="raison1" model="raison">
+            <field name="name">Remplacement</field>
+
+        </record>
+        <record id="priode1" model="priode">
+            <field name="name">2 semaines</field>
+            <field name="mois_essai" eval="0"></field>
+            <field name="jours_essai" eval="14"></field>
+
+        </record>
+        <record id="priode2" model="priode">
+            <field name="name">1 mois</field>
+            <field name="mois_essai" eval="1"></field>
+            <field name="jours_essai" eval="0"></field>
+
+        </record>
+        <record id="priode_cdi1" model="priode">
+            <field name="name">3 mois</field>
+            <field name="mois_essai" eval="3"></field>
+            <field name="jours_essai" eval="0"></field>
+            <field name="type">B</field>
+
+        </record>
+        <record id="priode_cdi2" model="priode">
+            <field name="name">1,5 mois</field>
+            <field name="type">A</field>
+            <field name="mois_essai" eval="1"></field>
+            <field name="jours_essai" eval="15"></field>
+
+        </record>
+        <record id="priode_cdi3" model="priode">
+            <field name="name">15 jours</field>
+            <field name="type">C</field>
+            <field name="mois_essai" eval="0"></field>
+            <field name="jours_essai" eval="15"></field>
+
+        </record>
+        <record id="preavis_cdi1" model="preavis">
+            <field name="name">1 mois</field>
+            <field name="mois_essai" eval="1"></field>
+            <field name="jours_essai" eval="0"></field>
+
+        </record>
+        <record id="preavis_cdi2" model="preavis">
+            <field name="name">8 jours</field>
+            <field name="mois_essai" eval="0"></field>
+            <field name="jours_essai" eval="8"></field>
+
+        </record>
+        <record id="preavis_cdi3" model="preavis">
+            <field name="name">2 mois</field>
+            <field name="mois_essai" eval="2"></field>
+            <field name="jours_essai" eval="0"></field>
+
+        </record>
+        <record id="preavis_cdi3" model="preavis">
+            <field name="name">3 mois</field>
+            <field name="mois_essai" eval="3"></field>
+            <field name="jours_essai" eval="0"></field>
+
+        </record>
+
+
+        <record id="priode3" model="priode">
+            <field name="name">8 jours</field>
+            <field name="type">G</field>
+
+        </record>
+        <record id="raison1" model="raison">
+            <field name="name">Remplacement d’un autre salarié</field>
+
+        </record>
+        <record id="raison2" model="raison">
+            <field name="name">Accroissement temporaire</field>
+
+        </record>
+        <record id="raison3" model="raison">
+            <field name="name">saisonnier</field>
+
+        </record>
+        <record id="raison4" model="raison">
+            <field name="name">Ouverture d’une entreprise ou d’un établissement</field>
+
+        </record>
+        <record id="raison5" model="raison">
+            <field name="name">Lancement d’un nouveau produit</field>
+
+        </record>
+
+
+        <record id="hr_ctr_type_cddd" model="hr.contract.type">
+            <field name="name">contrat à durée déterminée (CDD)</field>
+            <field name="index" eval="2"></field>
+
+            <field name="type"
+                   eval="[(4, ref('contrat_osi.type1')), (4, ref('contrat_osi.type2'))]"/>
+            <field name="raison"
+                   eval="[(4, ref('contrat_osi.raison1')), (4, ref('contrat_osi.raison2')), (4, ref('contrat_osi.raison3')), (4, ref('contrat_osi.raison4')), (4, ref('contrat_osi.raison5'))]"/>
+            <field name="période"
+                   eval="[(4, ref('contrat_osi.priode1')), (4, ref('contrat_osi.priode2'))]"/>
+
+
+        </record>
+        <record id="hr_ctr_type_cdi" model="hr.contract.type">
+            <field name="index" eval="1"></field>
+            <field name="name">contrat à durée indéterminée (CDI)</field>
+            <field name="type"
+                   eval="[(4, ref('contrat_osi.type1_cdi')), (4, ref('contrat_osi.type2_cdi'))]"/>
+
+            <field name="preavis"
+                   eval="[(4, ref('contrat_osi.preavis_cdi1')), (4, ref('contrat_osi.preavis_cdi3'))]"/>
+
+            <field name="période"
+                   eval="[(4, ref('contrat_osi.priode_cdi1')), (4, ref('contrat_osi.priode_cdi2')), (4, ref('contrat_osi.priode_cdi3'))]"/>
+
+
+        </record>
+
+        <record id="hr_ctr_type_cad" model="hr.contract.type">
+            <field name="name">contrat pour accomplir un travail déterminé</field>
+            <field name="index" eval="4"></field>
+
+
+        </record>
+        <record id="hr_ctr_type_anapic" model="hr.contract.type">
+            <field name="name">Contrats de stage Formation insertion (l'ANAPEC)</field>
+            <field name="index" eval="3"></field>
+
+        </record>
+
+    </data>
+</odoo>
