@@ -84,11 +84,11 @@ class HrResignation(models.Model):
 
     type = fields.Many2one(
         'type',
-        string='type',
+        string='type',store=True
     )
-    Employee_Category = fields.Many2one('category1em', string="Employee Category",
+    Employee_Category = fields.Many2one('category1em', string="Employee Category",store=True
                                         )
-    preavis = fields.Many2one('preavis', string="preavis",
+    preavis = fields.Many2one('preavis', string="preavis",store=True
                               )
 
 
