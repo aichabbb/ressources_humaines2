@@ -24,7 +24,9 @@ class hr_leave(models.Model):
             if rc.Age_la_retraite:
                 _logger.info('Device  is now disconnected UUUUUUUUUUUUUUUUUUUUUUUUUUUU%s', list)
 
-        # conf = list[len_C]
+        conf = list[len_C]
+        _logger.info('Device  is now disconnected UUUUUUUUUUUUUUUUUUUUUUUUUUUU%s', conf)
+
         # if self.holiday_status_id == absence_justifies:
         #     conge_justifies = self.env['hr.leave'].search([('holiday_status_id', '=', "absence justifies"),('employee_id', '=', self.employee_id.id)])
         #     conge_justifies_nom_jus = self.env['hr.leave'].search([('holiday_status_id', '=', "absence nom justifies"),('employee_id', '=', self.employee_id.id)])
