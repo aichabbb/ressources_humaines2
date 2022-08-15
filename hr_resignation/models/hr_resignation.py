@@ -70,7 +70,7 @@ class HrResignation(models.Model):
 
     expected_revealing_date = fields.Date(string="Last Day of Employee", required=True,
                                           help='Employee requested date on which he is revealing from the company.')
-    reason = fields.Text(string="description", required=True, help='Specify reason for leaving the company')
+    reason = fields.Text(string="description", required=False, help='Specify reason for leaving the company')
     notice_period = fields.Char(string="Notice Period")
     state = fields.Selection(
         [('draft', 'Draft'), ('confirm', 'Confirm'), ('approved', 'Approved'), ('cancel', 'Rejected')],
