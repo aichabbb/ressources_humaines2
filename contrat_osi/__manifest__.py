@@ -21,7 +21,6 @@
         'wizard/transformation.xml',
         'wizard/conge_wizart.xml',
         'wizard/dure.xml',
-        'views/type_contrat.xml',
     ],
     'license': 'AGPL-3',
     'installable': True,
