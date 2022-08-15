@@ -619,15 +619,15 @@ class categorie(models.Model):
             Liouma = Madate.split("-")[2]
             moit_test = Madate.split("-")[1]
             num = int(moit_test)
-            if  num == 7 :
+            if num == 1 or num == 3 or num == 5 or num ==7 or num == 8 or num == 10 or num ==12:
                 m = rc.mois * 31
                 #
                 rc.Duree = m + rc.jours
-            elif num == 2:
+            elif  num == 2:
                 m = rc.mois * 29
                 #
                 rc.Duree = m + rc.jours
-            elif num == 4 or num == 6 or num == 9 or num == 11:
+            elif num == 4 or num ==  6 or num == 9 or num == 11 :
                 m = rc.mois * 30
                 #
                 rc.Duree = m + rc.jours
