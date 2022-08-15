@@ -20,6 +20,7 @@ class hr_leave(models.Model):
         list = []
         for rc in config:
             list.append(rc)
+            _logger.info('Device  is now disconnected UUUUUUUUUUUUUUUUUUUUUUUUUUUU%s', list)
             if rc.Age_la_retraite:
                 _logger.info('Device  is now disconnected UUUUUUUUUUUUUUUUUUUUUUUUUUUU%s', list)
 
